@@ -4,7 +4,7 @@
 @tailwind utilities;
 body{
     margin: 0 auto; /* Memusatkan body di layar desktop */
-    max-width: 500px; /* Ukuran tetap untuk layar hp */
+    max-width: 600px; /* Ukuran tetap untuk layar hp */
 }
 @media screen and (max-width: 600px) {
   body {

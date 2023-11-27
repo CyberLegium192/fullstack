@@ -1,13 +1,23 @@
 import {useState, useEffect} from "react"
 import axios from "axios"
+import {useNavigate} from 'react-router-dom'
+
 const profile = () => {
   const [data, setData] = useState([])
-  
+  const navigate = useNavigate()
   axios.defaults.withCredentials = true
   useEffect(() => {
     axios.get("http://localhost:3000/user/profileUser")
-    .then(res => setData(res.data.user))
-  })
+    .then(res => {
+      if(res.data.user){
+        setData(res.data.user)
+      } else if(res.data.error == 'Token tidak disediakan'){
+        // setData("errorr")
+        navigate("/login")
+      }
+      console.log(res)
+    })
+  }, [])
   
   
   return (

@@ -30,8 +30,8 @@ const userLogin = (req, res) => {
   getUserByEmail(email, (user) => {
     if (user) {
       if (bcrypt.compareSync(password, user.password)) {
-        const token = jwt.sign({ userId: user }, secretKey, { expiresIn: '1d' });
-        res.cookie('token', token)
+        const token = jwt.sign({ userId: user }, secretKey, { expiresIn: '2h' });
+        res.cookie('token', token, { expires: new Date(Date.now() + 2 * 60 * 60 * 1000)})
         res.json({ token, user });
       } else {
         res.status(401).json({ error: 'Password salah' });
