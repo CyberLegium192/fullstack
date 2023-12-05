@@ -4,7 +4,7 @@ import { BsFillBellFill } from "react-icons/bs";
 import {Link} from "react-router-dom"
 const headers = () =>{
   return(
-  <div className="bg-red-600 relative p-3 flex justify-between items-end">
+  <div className="bg-red-600 sticky w-full p-3 flex justify-between items-end">
     <div className="w-24">
       <img src={Logo} className="w-full"/>
     </div>

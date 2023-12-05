@@ -9,14 +9,31 @@ function getUserByEmail(email, callback){
 
 const userRegis = async (req, res) => {
     try {
+    const avatar = req.file.filename
     const body = req.body;
     const saltRounds = 10;
     const hashedPassword = bcrypt.hashSync(body.password, saltRounds)
-    await userModels.postUser(body, hashedPassword);
-      res.status(200).json({
+    await userModels.postUser(body, hashedPassword, avatar, req, res);
+      res.json({
         message: "CREATE NEW User Success",
-        body
+        body,
+        avatar
       });
+    } catch (e) {
+      res.json({
+        message: e.message
+      })
+    }
+};
+
+const updateUser = async (req, res) => {
+    try {
+    const avatar = req.file.filename
+    const body = req.body;
+    await userModels.updateUser(body, avatar, req, res);
+    res.json({
+      message: "success update user"
+    })
     } catch (e) {
       res.json({
         message: e.message
@@ -34,10 +51,10 @@ const userLogin = (req, res) => {
         res.cookie('token', token, { expires: new Date(Date.now() + 2 * 60 * 60 * 1000)})
         res.json({ token, user });
       } else {
-        res.status(401).json({ error: 'Password salah' });
+        res.json({ error: 'Password salah' });
       }
     } else {
-      res.status(404).json({ error: 'Pengguna tidak ditemukan' });
+      res.json({ error: 'Pengguna tidak ditemukan' });
     }
   });
 }
@@ -45,5 +62,6 @@ const userLogin = (req, res) => {
 
 module.exports = {
     userRegis,
+    updateUser,
     userLogin
 };

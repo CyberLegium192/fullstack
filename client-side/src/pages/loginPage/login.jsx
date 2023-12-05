@@ -1,43 +1,75 @@
 import { Button, Checkbox, Label, TextInput } from 'flowbite-react';
 import {useState, useEffect} from "react"
 import axios from "axios"
-import {useNavigate} from "react-router-dom"
+import {useNavigate, Link} from "react-router-dom"
+
 const login = () => {
+  const navigate = useNavigate()
+  axios.defaults.withCredentials = true
+  
   const [value, setValue] = useState({
     email: "",
     password: "",
   })
-  const navigate = useNavigate()
-  axios.defaults.withCredentials = true
+  const [erorrPass, setErorrPass] =useState("")
+  
+  
   const submit = (e) => {
     e.preventDefault()
     axios.post("http://localhost:3000/user/login", value)
-    .then(res => navigate("/profile"))
+    .then(res => {
+      if (res.data.error == "Pengguna tidak ditemukan") {
+        alert(res.data.error)
+      } else if(res.data.error == "Password salah"){
+        setErorrPass(res.data.error)
+      }else{
+        navigate("/profile")
+      }
+    })
   }
   
   
   return (
-    <form className="flex max-w-md flex-col gap-4" onSubmit={submit}>
+    <div className="h-full flex items-center">
+    <form className="flex flex-col gap-4 w-full p-5 px-8 font-poppins" onSubmit={submit}>
       <div>
         <div className="mb-2 block">
-          <Label htmlFor="email1" value="Your email" />
+          <Label htmlFor="email1" value="Email" className="text-md"/>
         </div>
-        <TextInput id="email1" type="email" placeholder="name@flowbite.com" required 
+        <TextInput id="email1" type="email" placeholder="example@gmail.com" required
         onChange={(e) => setValue({...value, email: e.target.value})}/>
       </div>
+      
       <div>
         <div className="mb-2 block">
-          <Label htmlFor="password1" value="Your password" />
+          <Label htmlFor="password1" value="password"
+          className="text-md"
+          color={erorrPass == "" ? "gray" : "failure"}
+          />
         </div>
         <TextInput id="password1" type="password" required 
-        onChange={(e) => setValue({...value, password: e.target.value})}/>
+        onChange={(e) => setValue({...value, password: e.target.value})} 
+          color={erorrPass == "" ? "gray" : "failure"}
+          helperText={
+            <>
+            {
+              erorrPass == "" ? "" : <span className="font-poppins text-sm">{erorrPass}!</span>
+            }
+            </>
+          }
+        />
       </div>
-      <div className="flex items-center gap-2">
-        <Checkbox id="remember" />
-        <Label htmlFor="remember">Remember me</Label>
+      
+      <div className="flex items-center justify-end">
+        <Link className="text-text-blue-600">Forgot password?</Link>
       </div>
-      <Button type="submit">Submit</Button>
+      
+      <Button type="submit" color="failure" className="text-lg font-poppins">Submit</Button>
+      <p className="text-center">Don't have an Account? <Link to="/register" className="text-blue-600 ml-2">Signup</Link></p>
+      
+      
     </form>
+    </div>
   );
 }
 

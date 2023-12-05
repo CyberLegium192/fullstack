@@ -13,9 +13,10 @@ import Register from "./pages/registerPage/register.jsx";
 import {useEffect, useState} from 'react'
 function App() {
     return (
-        <div className="noval">
+        <div className="container">
             <Router>
                 <Headers />
+                <div className="wrapper">
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/news" element={<NewsPage />} />
@@ -25,6 +26,7 @@ function App() {
                     <Route path="/register" element={<Register />} />
                     <Route path="/profile" element={<Profile />} />
                 </Routes>
+                </div>
                 <Navbar />
             </Router>
         </div>

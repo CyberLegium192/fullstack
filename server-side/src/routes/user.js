@@ -20,7 +20,8 @@ const verifyToken = (req, res, next) => {
     });
 };
 
-router.post("/register", (req, res) => userController.userRegis(req, res));
+router.post("/register", upload.single("avatar"), (req, res) => userController.userRegis(req, res));
+router.patch("/update/:id", upload.single("avatar"), (req, res) => userController.updateUser(req, res));
 router.post("/login", (req, res) => userController.userLogin(req, res));
 router.get("/profileUser", verifyToken, (req, res) => {
   return res.json({
@@ -28,24 +29,6 @@ router.get("/profileUser", verifyToken, (req, res) => {
     user: req.userId
   })
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 module.exports = router;
