@@ -7,6 +7,11 @@ body{
     max-width: 600px; /* Ukuran tetap untuk layar hp */
     /* overflow-y: hidden; */
 }
+.text-normal{
+  font-size: 16px;
+}
+
+
 @media screen and (max-width: 600px) {
   body {
     width: 100%;

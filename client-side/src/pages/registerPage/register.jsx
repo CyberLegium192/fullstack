@@ -8,6 +8,11 @@ const register = () => {
   const navigate = useNavigate()
   axios.defaults.withCredentials = true
   
+  const [userVal, setUserVal] = useState("")
+  const [emailVal, setEmailVal] = useState("")
+  const [passVal1, setPassVal1] = useState("")
+  const [passVal2, setPassVal2] = useState("")
+  const [passVerif, setPassVerif] = useState("")
   const [value, setValue] = useState({
     username: "",
     email: "",
@@ -15,32 +20,65 @@ const register = () => {
     bio: "",
     gender: "",
     role: "user",
-    avatar: null,
+    avatar: null
   })
-  const [erorrPass, setErorrPass] = useState("")
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+  const validatePassword = (password) => {
+    // Add additional password requirements if needed
+    return password.length >= 6;
+  };
   
-  
-  const submit = (e) => {
-    e.preventDefault()
-    var formData = new FormData();
-    formData.append("username", value.username)
-    formData.append("email", value.email)
-    formData.append("password", value.password)
-    formData.append("bio", value.bio)
-    formData.append("gender", value.gender)
-    formData.append("role", value.role)
-    formData.append("avatar", value.avatar)
-    axios.post("http://localhost:3000/user/register", formData)
-    .then(res => {
-      console.log(res)
-      if (res.data.message == "CREATE NEW User Success") {
-        navigate("/profile")
-      } else{
-        alert("silahkan cek terlebih dahulu")
-      }
-    })
-  }
-  
+    const submit = (e) => {
+    e.preventDefault();
+
+    // Reset validation messages
+    setUserVal("");
+    setEmailVal("");
+    setPassVal1("");
+    setPassVal2("");
+
+    let isValid = true; 
+    // Validate email
+    if (value.email.length < 1 || !validateEmail(value.email)) {
+      setEmailVal("Invalid email address");
+      isValid = false;
+    }
+    // Validate username
+    if (value.username.length === 0) {
+      setUserVal("Username is required");
+      isValid = false;
+    }
+    // Validate password
+    if (!validatePassword(value.password)) {
+      setPassVal1("Password should be at least 6 characters");
+      isValid = false;
+    }
+    // Validate re-entered password
+    if (value.password !== passVerif) {
+      setPassVal2("Passwords do not match");
+      isValid = false;
+    }
+    // If all validations pass, submit the form
+    if (isValid) {
+      axios.post("http://localhost:3000/user/register", value)
+        .then(res => {
+          if (res.data.message === "CREATE NEW User Success") {
+            navigate("/login");
+          } else {
+            alert("Please check the form again");
+          }
+        })
+        .catch(error => {
+          // Handle Axios request error
+          alert("An error occurred during registration");
+        });
+    }
+  };
+
   
   return(
     <div className="h-full flex items-center">
@@ -48,34 +86,72 @@ const register = () => {
     
       <div>
         <div className="mb-2 block">
-          <Label htmlFor="username" value="Username" className="text-md"/>
+          <Label htmlFor="username" value="Username" className="text-md"
+          color={userVal == "" ? "gray" : "failure"} />
         </div>
-        <TextInput id="username" type="text" placeholder="Jacob" required
-        onChange={(e) => setValue({...value, username: e.target.value})}/>
+        <TextInput id="username" type="text" placeholder="Jacob"
+        onChange={(e) => setValue({...value, username: e.target.value})}
+        color={userVal == "" ? "gray" : "failure"}
+          helperText={
+            <>
+            {
+              userVal == "" ? "" : <span className="font-poppins text-sm">{userVal}!</span>
+            }
+            </>
+          }/>
       </div>
       
       <div>
         <div className="mb-2 block">
-          <Label htmlFor="email1" value="Email" className="text-md"/>
+          <Label htmlFor="email1" value="Email" className="text-md"
+          color={emailVal == "" ? "gray" : "failure"}/>
         </div>
-        <TextInput id="email1" type="email" placeholder="example@gmail.com" required
-        onChange={(e) => setValue({...value, email: e.target.value})}/>
+        <TextInput id="email1" type="email" placeholder="example@gmail.com" 
+        onChange={(e) => setValue({...value, email: e.target.value})}
+        color={emailVal == "" ? "gray" : "failure"}
+          helperText={
+            <>
+            {
+              emailVal == "" ? "" : <span className="font-poppins text-sm">{emailVal}!</span>
+            }
+            </>
+          }/>
       </div>
       
       <div>
         <div className="mb-2 block">
           <Label htmlFor="password1" value="password"
           className="text-md"
-          color={erorrPass == "" ? "gray" : "failure"}
+          color={passVal1 == "" ? "gray" : "failure"}
           />
         </div>
-        <TextInput id="password1" type="password" required 
+        <TextInput id="password1" type="password"  
         onChange={(e) => setValue({...value, password: e.target.value})} 
-          color={erorrPass == "" ? "gray" : "failure"}
+          color={passVal1 == "" ? "gray" : "failure"}
           helperText={
             <>
             {
-              erorrPass == "" ? "" : <span className="font-poppins text-sm">{erorrPass}!</span>
+              passVal1 == "" ? "" : <span className="font-poppins text-sm">{passVal1}!</span>
+            }
+            </>
+          }
+        />
+      </div>
+      
+      <div>
+        <div className="mb-2 block">
+          <Label htmlFor="password2" value="retiry password"
+          className="text-md"
+          color={passVal2 == "" ? "gray" : "failure"}
+          />
+        </div>
+        <TextInput id="password2" type="password"  
+        onChange={(e) => setPassVerif(e.target.value)} 
+          color={passVal2 == "" ? "gray" : "failure"}
+          helperText={
+            <>
+            {
+              passVal2 == "" ? "" : <span className="font-poppins text-sm">{passVal2}!</span>
             }
             </>
           }
@@ -83,7 +159,6 @@ const register = () => {
       </div>
       
       
-      <input type="file" name="avatar" id="avatar" onChange={(e) => setValue({...value, avatar: e.target.files[0]})} />
       
       
       

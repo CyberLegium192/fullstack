@@ -9,19 +9,16 @@ function getUserByEmail(email, callback){
 
 const userRegis = async (req, res) => {
     try {
-    const avatar = req.file.filename
     const body = req.body;
     const saltRounds = 10;
     const hashedPassword = bcrypt.hashSync(body.password, saltRounds)
-    await userModels.postUser(body, hashedPassword, avatar, req, res);
+    await userModels.postUser(body, hashedPassword, req, res)
       res.json({
         message: "CREATE NEW User Success",
-        body,
-        avatar
       });
-    } catch (e) {
+    } catch (err) {
       res.json({
-        message: e.message
+        message: err.message
       })
     }
 };
@@ -31,8 +28,14 @@ const updateUser = async (req, res) => {
     const avatar = req.file.filename
     const body = req.body;
     await userModels.updateUser(body, avatar, req, res);
+    
+    const {username, bio, gender, role} = body
     res.json({
-      message: "success update user"
+      message: "success update user",
+      username: username,
+      bio: bio,
+      gender: gender,
+      avatar: avatar,
     })
     } catch (e) {
       res.json({

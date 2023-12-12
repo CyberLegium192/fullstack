@@ -1,5 +1,5 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
@@ -11,13 +11,24 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 const navbar = () => {
     const [value, setValue] = useState("");
     const navigate = useNavigate()
+    const location = useLocation();
+    
+    useEffect(() => {
+      const currentPath = location.pathname.substring(1); 
+        setValue(currentPath);
+    }, [location.pathname])
+    
+    
+    
+    
+    
     const handleChange = (event, newValue) => {
         setValue(newValue);
         navigate(`/${newValue}`)
     };
 
     return (
-        <div className="w-full fixed bottom-0 p-2">
+        <div className="w-full fixed bottom-0 p-2 font-poppins">
             <BottomNavigation
                 value={value}
                 onChange={handleChange}
@@ -75,13 +86,11 @@ const navbar = () => {
                 />
                 <BottomNavigationAction
                     label="Profile"
-                    value="profile"
-                    style={{color: value === "profile" ? "black" : "#94a3b8" }}
+                    value={"profile" && "login" && "register"}
+                    style={{color: value === `${'login' && "profile" && "register"}` ? "black" : "#94a3b8" }}
                     icon={
                         <AccountCircleRoundedIcon
-                            style={{
-                                color: value === "profile" ? "black" : "#94a3b8"
-                            }}
+                            style={{color: value === `${'login' && "profile" && "register"}` ? "black" : "#94a3b8" }}
                         />
                     }
                 />

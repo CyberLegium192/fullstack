@@ -18,7 +18,7 @@ const verifyToken = (req, res, next) => {
         req.userId = decoded.userId;
         next();
     });
-};
+}
 
 router.post("/register", upload.single("avatar"), (req, res) => userController.userRegis(req, res));
 router.patch("/update/:id", upload.single("avatar"), (req, res) => userController.updateUser(req, res));

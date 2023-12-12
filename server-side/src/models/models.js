@@ -1,24 +1,18 @@
 const con = require('../utils/db.js')
 
 
-const postUser = (body, hashedPassword, avatar, req, res) => {
+const postUser = (body, hashedPassword, req, res) => {
   const {username, email, password, bio, gender, role} = body
-  const profile = req.file.filename
-  
+  const roleId = role
+  // const profile = req.file.filename
   const sql = `INSERT INTO user (username, email, password, bio, gender, role, avatar) VALUES (?, ?, ?, ?, ?, ?, ?)`
-  con.query(sql, [username, email, hashedPassword, bio, gender, role, profile], (err, results) => {
-    if (err) {
-      res.json({
-        message: "erorr kontol"
-      });
-    } else {
-      return results
-    }
+  con.query(sql, [username, email, hashedPassword, bio, gender, role, roleId], (err, results) => {
+    if (err) throw err
   });
 }
 
 const updateUser = (body, avatar, req, res) => {
-  const {username, email, bio, gender, role} = body
+  const {username, bio, gender, role} = body
   const id = req.params.id
   const profile = req.file.filename
   

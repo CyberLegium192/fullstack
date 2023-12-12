@@ -13,7 +13,7 @@ app.use(cors({
   methods: ['GET', 'POST', 'PATCH'],
   credentials: true
 }))
-
+app.use('/assets', express.static('public/userProfile'))
 app.use("/user", userRouter)
 
 
