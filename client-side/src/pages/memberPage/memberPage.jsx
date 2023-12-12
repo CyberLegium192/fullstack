@@ -21,7 +21,7 @@ const memberPage = () => {
     <div className="p-6 pt-10">
       <h2>MEMBER CARD</h2>
       
-      <div className="grid grid-cols-4 gap-3">
+      <div className="grid grid-cols-4 justify-between mt-5 gap-x-2 gap-y-4">
       {
         data.map((item) => <Card />)
       }
