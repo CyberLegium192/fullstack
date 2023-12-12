@@ -1,7 +1,14 @@
-import React from 'react'
-imp
-const $1 = () => {
-  return <div>$0</div>
+
+const memberCard = () => {
+  return (
+  <div className="bg-blue-500 w-full p-2">
+    {/* image container */}
+    <div>
+
+    </div>
+
+  </div>
+  )
 }
 
-export default $1
+export default memberCard
