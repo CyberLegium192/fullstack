@@ -20,6 +20,28 @@ const verifyToken = (req, res, next) => {
     });
 }
 
+const generateToken = (userId, avatar) => {
+  const payload = {
+    userId,
+    avatar,
+  };
+
+  return jwt.sign(payload, secretKey, { expiresIn: '1h' });
+};
+
+const updateTokenAfterAvatarChange = (req, res, next) => {
+  const { userId, avatar } = req;
+  const token = generateToken(userId, avatar);
+
+  // Setelah token dibuat, kirimkan ke klien
+  res.cookie('token', token, { httpOnly: true, maxAge: 3600000 }); 
+
+  next();
+};
+
+
+
+
 router.post("/register", upload.single("avatar"), (req, res) => userController.userRegis(req, res));
 router.patch("/update/:id", upload.single("avatar"), (req, res) => userController.updateUser(req, res));
 router.post("/login", (req, res) => userController.userLogin(req, res));
@@ -30,5 +52,12 @@ router.get("/profileUser", verifyToken, (req, res) => {
   })
 })
 
+// router.patch('/profile/edit/avatar/:id', upload.single('avatar'), (req, res) => userController.updateAvatar(req, res))
+router.patch('/profile/edit/avatar/:id', upload.single('avatar'), userController.updateAvatar, updateTokenAfterAvatarChange, (req, res) => {
+  res.json({
+    message: 'Update avatar success',
+    profile: req.userId,
+  });
+});
 
 module.exports = router;

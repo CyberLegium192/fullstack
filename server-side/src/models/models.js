@@ -1,5 +1,13 @@
 const con = require('../utils/db.js')
 
+const getUserByEmail = (email, callback) => {
+  // console.log(email)
+  const sql = `SELECT * FROM user WHERE email= ?`
+  con.query(sql, [email], (err, results) => {
+    if(err) throw err
+    callback(results[0])
+  })
+}
 
 const postUser = (body, hashedPassword, req, res) => {
   const {username, email, password, bio, gender, role} = body
@@ -32,21 +40,16 @@ const updateUser = (body, avatar, req, res) => {
 }
 
 
-
-
-
-const getUserByEmail = (email, callback) => {
-  // console.log(email)
-  const sql = `SELECT * FROM user WHERE email= ?`
-  con.query(sql, [email], (err, results) => {
-    if(err) throw err
-    callback(results[0])
+const updateAvatarUser = (id, profile) => {
+  const sql = `UPDATE user SET avatar='${profile}' WHERE id='${id}'`
+  con.query(sql, (err, result) => {
+    if(err) throw err 
   })
 }
-
 
 module.exports = {
   postUser,
   updateUser,
-  getUserByEmail
+  getUserByEmail,
+  updateAvatarUser
 }

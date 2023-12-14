@@ -62,9 +62,24 @@ const userLogin = (req, res) => {
   });
 }
 
+const updateAvatar = async (req, res) => {
+  const profile = req.file.filename
+  const id = req.params.id
+  try {
+    await userModels.updateAvatarUser(id, profile);
+    res.json({
+      message: 'update avatar success',
+      profile
+    })
+  } catch (e) {
+    console.log('error dari update avatar',  e)
+    res.json(e.message)
+  }
+}
 
 module.exports = {
     userRegis,
     updateUser,
-    userLogin
+    userLogin,
+    updateAvatar
 };

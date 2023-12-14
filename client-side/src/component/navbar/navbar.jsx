@@ -40,7 +40,11 @@ const navbar = () => {
     };
 
     return (
+<<<<<<< HEAD
         <div className="w-full max-w-screen-sm fixed bottom-0 p-2 font-poppins">
+=======
+        <div className="w-full fixed bottom-0 p-2 font-poppins Isrespoonsive">
+>>>>>>> refs/remotes/origin/main
             <BottomNavigation
                 value={value}
                 onChange={handleChange}
