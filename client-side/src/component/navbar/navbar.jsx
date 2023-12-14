@@ -15,7 +15,19 @@ const navbar = () => {
     
     useEffect(() => {
       const currentPath = location.pathname.substring(1); 
-        setValue(currentPath);
+      if (currentPath.includes('beranda')) {
+        setValue('beranda')
+      } else if(currentPath.includes('news')){
+        setValue('news')
+      } else if(currentPath.includes('schedule')){
+        setValue('schedule')
+      } else if(currentPath.includes('member')){
+        setValue('member')
+      } else if(currentPath.includes('profile')){
+        setValue('profile')
+      } else{
+        console.log('halo')
+      }
     }, [location.pathname])
     
     
@@ -28,7 +40,7 @@ const navbar = () => {
     };
 
     return (
-        <div className="w-full fixed bottom-0 p-2 font-poppins">
+        <div className="w-full max-w-screen-sm fixed bottom-0 p-2 font-poppins">
             <BottomNavigation
                 value={value}
                 onChange={handleChange}
@@ -37,12 +49,12 @@ const navbar = () => {
             >
                 <BottomNavigationAction
                     label="Beranda"
-                    value=""
-                    style={{ color: value === "" ? "black" : "#94a3b8" }}
+                    value="beranda"
+                    style={{ color: value === "beranda" ? "black" : "#94a3b8" }}
                     icon={
                         <HomeIcon
                             style={{
-                                color: value === "" ? "black" : "#94a3b8"
+                                color: value === "beranda" ? "black" : "#94a3b8"
                             }}
                         />
                     }
@@ -86,11 +98,11 @@ const navbar = () => {
                 />
                 <BottomNavigationAction
                     label="Profile"
-                    value={"profile" && "login" && "register"}
-                    style={{color: value === `${'login' && "profile" && "register"}` ? "black" : "#94a3b8" }}
+                    value="profile"
+                    style={{color: value === `profile` ? "black" : "#94a3b8" }}
                     icon={
                         <AccountCircleRoundedIcon
-                            style={{color: value === `${'login' && "profile" && "register"}` ? "black" : "#94a3b8" }}
+                            style={{color: value === `profile` ? "black" : "#94a3b8" }}
                         />
                     }
                 />

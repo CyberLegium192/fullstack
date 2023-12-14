@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom";
 import "./App.css";
 
 import Headers from "./component/headers/headers.jsx";
@@ -15,10 +15,11 @@ function App() {
     return (
         <div className="container">
             <Router>
-                <Headers />
                 <div className="wrapper">
+                <Headers />
                 <Routes>
-                    <Route path="/" element={<HomePage />} />
+                    <Route path="/" element={<Navigate to="/beranda" />} />
+                    <Route path="/beranda" element={<HomePage />} />
                     <Route path="/news" element={<NewsPage />} />
                     <Route path="/schedule" element={<SchedulePage />} />
                     <Route path="/member" element={<MemberPage />} />
@@ -26,8 +27,8 @@ function App() {
                     <Route path="/register" element={<Register />} />
                     <Route path="/profile" element={<Profile />} />
                 </Routes>
-                </div>
                 <Navbar />
+                </div>
             </Router>
         </div>
     );

@@ -30,7 +30,7 @@ const login = () => {
   
   
   return (
-    <div className="h-full flex items-center">
+    <div className="min-h-screen w-full flex items-center">
     <form className="flex flex-col gap-4 w-full p-5 px-8 font-poppins" onSubmit={submit}>
       <div>
         <div className="mb-2 block">

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import {useState, useEffect} from 'react'
-
+import Card from "../../component/card-member/card-member"
 
 const memberPage = () => {
   const [data, setData] = useState([])
@@ -11,19 +11,14 @@ const memberPage = () => {
   }, [])
   
   
-  const submit =()=>{
-    console.log(data)
-  }
-  
-  
   
   return (
-    <div className="p-6 pt-10">
+    <div className="p-3 pt-10 pb-14">
       <h2>MEMBER CARD</h2>
       
-      <div className="flex">
+      <div className="w-full flex justify-between flex-wrap p-2">
       {
-        data.map((item) => )
+        data.map((item) => <Card item={item} key={item.id}/>) 
       }
       </div>
       
