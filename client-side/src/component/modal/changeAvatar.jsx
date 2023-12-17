@@ -18,7 +18,7 @@ const ModalAvatar = ({setOpenModal, openModal, updateAvatar, setNewToken}) => {
         </Modal.Body>
         
         <Modal.Footer>
-        <Button color="failure" onClick={()=> handleUpload()}>Upload</Button>
+        <Button color="failure" onClick={()=> handleUpload()} aria-label="upload avatar">Upload</Button>
         </Modal.Footer>
       </Modal>
     </>

@@ -9,6 +9,18 @@ const getUserByEmail = (email, callback) => {
   })
 }
 
+const getUserProfile = (id, res) => {
+  const sql = `SELECT * FROM user WHERE id= ?`
+  con.query(sql, [id], (err, results) => {
+    if(err) throw err
+    return res.json({
+      message: 'success getting data',
+      results
+    })
+  })
+}
+
+
 const postUser = (body, hashedPassword, req, res) => {
   const {username, email, password, bio, gender, role} = body
   const roleId = role
@@ -51,5 +63,6 @@ module.exports = {
   postUser,
   updateUser,
   getUserByEmail,
-  updateAvatarUser
+  updateAvatarUser,
+  getUserProfile
 }

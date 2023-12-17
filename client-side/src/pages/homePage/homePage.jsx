@@ -1,6 +1,8 @@
+import {useState, useEffect} from "react"
 const homePage = () => {
+  
   return (
-    <h1>HOMEPAGE</h1>
+    <h1>HOME PAGE</h1>
   )
 }
 

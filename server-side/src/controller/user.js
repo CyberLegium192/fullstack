@@ -77,9 +77,19 @@ const updateAvatar = async (req, res) => {
   }
 }
 
+const getUser = async (req, res) => {
+  const id = req.params.id
+  const body = req.body
+  try {
+    await userModels.getUserProfile(id, res)
+    
+  } catch (e) {}
+}
+
 module.exports = {
     userRegis,
     updateUser,
     userLogin,
-    updateAvatar
+    updateAvatar,
+    getUser
 };
