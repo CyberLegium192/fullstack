@@ -24,7 +24,7 @@ const generateToken = (userId, avatar) => {
     userId,
     avatar,
   };
-  return jwt.sign(payload, secretKey, { expiresIn: '1h' });
+  return jwt.sign(payload, secretKey, { expiresIn: '365d' });
 };
 const updateTokenAfterAvatarChange = (req, res, next) => {
   const { userId, avatar } = req;

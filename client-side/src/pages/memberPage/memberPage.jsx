@@ -8,7 +8,7 @@ const memberPage = () => {
   
       
   useEffect(() => {
-      memberList("member")
+      memberList("member/memberList")
       .then(datas => setData(datas))
   }, [])
   
@@ -16,11 +16,13 @@ const memberPage = () => {
   
   return (
     <div className="p-3 pt-6 pb-14">
-      <h2>MEMBER CARD</h2>
+      <h2 className='text-xl font-poppins text-red-600 font-medium'>Member Live</h2>
       <div className="w-full flex justify-between flex-wrap p-2">
+      
         {
           data?.map((item) => <Card item={item} key={item.id}/>)
         }
+        
       </div>
     
     

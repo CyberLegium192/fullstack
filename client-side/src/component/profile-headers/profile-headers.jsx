@@ -11,17 +11,17 @@ const profileHeader = ({avatar, updateAvatar}) => {
   
   return(
     <>
-    <div className='flex p-2 gap-x-4'>
+    <div className='flex p-2 gap-x-4 w-full'>
       <div className='h-24 w-24 flex relative flex-col items-center'>
         <img src={`http://localhost:3000/assets/${avatar == "user" || !avatar ? 'f2.png' : avatar}`} 
-        className='border-2 border-slate-700 w-20 h-20 rounded-full object-cover' alt="avatar user"/>
+        className='border-2 border-slate-700 w-24 h-24 rounded-full object-cover' alt="avatar user"/>
         
-        <button onClick={() => setOpenModal(!openModal)} className='text-red-500 text--poppins cursor-pointer z-20 text-sm mt-2 font-medium'
+        <button onClick={() => setOpenModal(!openModal)} className='text-red-500 text-poppins cursor-pointer z-20 text-[16px] mt-2 font-medium'
         aria-label="modal button">Ganti Avatar
         </button>
       </div>
       
-      <ul className='flex items-center px-7 justify-between w-5/6 text-center font-poppins text-red-600 font-medium capitalize'>
+      <ul className='flex items-center px-7 justify-between w-[80%] text-center font-poppins text-red-600 font-medium capitalize'>
         <li className='text-xl'>0
           <p className='text-normal mt-1'>lagu disukai</p>
         </li>
@@ -33,6 +33,9 @@ const profileHeader = ({avatar, updateAvatar}) => {
         </li>
       </ul>
     </div>  
+    
+    
+    
     <ModalAvatar setOpenModal={setOpenModal} openModal={openModal} updateAvatar={updateAvatar} />
     
     

@@ -5,19 +5,30 @@ const app = express()
 const cors = require("cors")
 const cookieParser = require("cookie-parser")
 const userRouter = require("./src/routes/user.js")
+const memberRouter = require("./src/routes/member.js")
+const scheduleRouter = require("./src/routes/schedule.js")
+const newsRouter = require("./src/routes/news.js")
 const path = require('path')
 
 app.use(express.json())
 app.use(cookieParser())
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
+
 app.use(cors({
   origin: ["http://localhost:5173"],
   methods: ['GET', 'POST', 'PATCH'],
   credentials: true
 }))
-app.use('/assets', express.static('public/userProfile'))
-app.use("/user", userRouter)
 
+app.use('/assets', express.static('public/userProfile'))
+app.use('/profile', express.static('public/member-profile'))
+app.use('/schedule/images', express.static('public/schedule'))
+
+app.use("/api/v1/user", userRouter)
+app.use('/api/v1/member', memberRouter)
+app.use('/api/v1/schedule', scheduleRouter)
+app.use('/api/v1/news', newsRouter)
 
 
 
