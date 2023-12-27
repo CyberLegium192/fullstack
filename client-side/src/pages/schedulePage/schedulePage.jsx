@@ -12,7 +12,7 @@ const schedulePage = () => {
     }
     
     const fetchingSchedule = () => {
-        scheduleList("/")
+        scheduleList("/scheduleList")
         .then(datas => setData(datas))
     }
     
@@ -25,7 +25,7 @@ const schedulePage = () => {
 
 
     return (
-        <div className="p-3 pt-6 pb-14">
+        <div className="p-3 pt-6 pb-28">
         {/*FORM INPUT*/}
         <Form handleSearch={handleSearch } />
         

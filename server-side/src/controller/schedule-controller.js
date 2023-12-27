@@ -16,6 +16,12 @@ const postSchedule = async (req, res) => {
   await modelsSchedule.postSchedule(req, res)
 }
 
+// POST SCHEDULE AND MEMBERPERFROM
+const postScheduleAndMember = async (req, res) => {
+  await modelsSchedule.scheduleAndMemberPerform(req,res)
+}
+
+
 // GET MEMBER PERFORM 
 const getMemberPerform = async (req, res) => {
   try {
@@ -29,6 +35,7 @@ const getMemberPerform = async (req, res) => {
 
 module.exports={
   getSchedule,
+  postSchedule,
+  postScheduleAndMember,
   getMemberPerform,
-  postSchedule
 }

@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom";
 import "./App.css";
+import axios from 'axios'
 
 import Headers from "./component/headers/headers.jsx";
 import Navbar from "./component/navbar/navbar.jsx";
@@ -12,6 +13,12 @@ import Profile from "./pages/profilePage/profile.jsx";
 import Register from "./pages/registerPage/register.jsx";
 import {useEffect, useState} from 'react'
 function App() {
+  axios.defaults.withCredentials = true
+  // useEffect(() => {
+  //   axios.get("http://localhost:3000/api/v1/user/profileUser")
+  // }, [])
+  
+  
     return (
         <div className="container">
             <Router>

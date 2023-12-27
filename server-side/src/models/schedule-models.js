@@ -12,12 +12,11 @@ const getSchedule = (req, res) => {
   })
 }
 
-// POST SCHEDULE QUERY
+// POST ONLY SCHEDULE QUERY
 const postSchedule = (req, res) => {
-  const {setlist, tema, date, time, link} = req.body
-  
-  const sql = `INSERT INTO schedule (setlist, tema, date, time, link) VALUES (?, ?, ?, ?, ?)`
-  db.query(sql, [setlist, tema, date, time, link], (err, schedule) => {
+  const {setlist, title, date, time, link} = req.body
+  const sql = `INSERT INTO schedule (setlist, title, date, time, link) VALUES (?, ?, ?, ?, ?)`
+  db.query(sql, [setlist, title, date, time, link], (err, schedule) => {
     if (err) throw err
     res.json({
       message: 'success',
@@ -25,6 +24,43 @@ const postSchedule = (req, res) => {
     })
   })
 }
+
+
+// POST SCHEDULE AND MEMEBRPERFORM QUERY
+const scheduleAndMemberPerform = (req, res) => {
+  const { setlist, title, date, time, link, acara, memberPerform } = req.body;
+  
+  // Insert data ke tabel schedule
+  db.query('INSERT INTO schedule (setlist, title, date, time, link) VALUES (?, ?, ?, ?, ?)',
+    [setlist, title, date, time, link],
+    (err, scheduleResult) => {
+      if (err) {
+        console.error('Error inserting schedule:', err.message);
+        res.status(500).json({ error: 'Internal Server Error' });
+        return;
+      }
+
+      const scheduleId = scheduleResult.insertId;
+
+      // Insert data ke tabel membersPerform
+      const memberInserts = memberPerform.map(member => [scheduleId, member.member]);
+
+      db.query('INSERT INTO membersPerform (schedule_id, member) VALUES ?',
+        [memberInserts],
+        (err, memberResult) => {
+          if (err) {
+            console.error('Error inserting membersPerform:', err.message);
+            res.status(500).json({ error: 'Internal Server Error' });
+            return;
+          }
+
+          res.json({ message: 'Data inserted successfully', scheduleId });
+        }
+      );
+    }
+  );
+}
+
 
 
 // MEMBER PERFORM QUERY
@@ -43,6 +79,8 @@ const getMemberPerform = (req, res) => {
 
 module.exports={
   getSchedule,
+  postSchedule,
+  scheduleAndMemberPerform,
   getMemberPerform,
-  postSchedule
+  
 }

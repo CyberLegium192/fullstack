@@ -16,7 +16,7 @@ const login = () => {
   
   const submit = (e) => {
     e.preventDefault()
-    axios.post("http://localhost:3000/user/login", value)
+    axios.post("http://localhost:3000/api/v1/user/login", value)
     .then(res => {
       if (res.data.error == "Pengguna tidak ditemukan") {
         alert(res.data.error)

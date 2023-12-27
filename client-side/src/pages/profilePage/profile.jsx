@@ -17,7 +17,7 @@ const profile = () => {
     formData.append('avatar', avatar)
     try {
       const response = await axios.patch(
-        `http://localhost:3000/user/profile/edit/avatar/${data.id}`, 
+        `http://localhost:3000/api/v1/user/profile/edit/avatar/${data.id}`, 
         formData,
         {
           headers: {
@@ -35,7 +35,7 @@ const profile = () => {
     }
   };
   const fethcing = () => {
-    axios.get("http://localhost:3000/user/profileUser", {
+    axios.get("http://localhost:3000/api/v1/user/profileUser", {
       headers: {
         Authorization: `Bearer ${newToken || datas.token}`,
       },
@@ -44,7 +44,6 @@ const profile = () => {
       if(res.data.user){
         setDataAuth(res.data.user)
         setId(res.data.user.id)
-        
       } else if(res.data.error == 'Token tidak disediakan'){
         navigate("/login")
       }
@@ -56,9 +55,11 @@ const profile = () => {
     fethcing()
   }, [id])
   useEffect(() => {
-    axios.get(`http://localhost:3000/user/profilePage/${datas.id}`)
+    axios.get(`http://localhost:3000/api/v1/user/profilePage/${datas.id}`)
     .then(res => {
       setData(res.data.results[0])
+      localStorage.setItem('user', res.data.results[0]?.role)
+      // console.log(res.data.results[0]?.role)
     })
   }, [id])
     

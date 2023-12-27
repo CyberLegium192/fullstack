@@ -20,7 +20,8 @@ const scheduleCard = ({item}) => {
   }, [member])
   
   return(
-    <Link to='/detail/schedule/2' className={`w-full shadow-md  rounded-lg overflow-hidden relative before:bg-red-500 
+    <Link to={`${item.setlist == "event" ? item.link : 
+      `/detail/schedule/${item.id}`}`} className={`w-full shadow-md  rounded-lg overflow-hidden relative before:bg-red-500 
          duration-500 cursor-default hover:-translate-y-3`} key={item.id}>
         
         <div className={`w-full h-32 z-20 relative object-cover relative before:absolute before:w-full before:h-full before:-z-10 before:
@@ -28,14 +29,11 @@ const scheduleCard = ({item}) => {
         `}>
             <img src={`http://localhost:3000/schedule/images/${item.setlist}.jpg`} className='w-full h-full object-contain z-20' />
         </div>
-{/*TITLE CONTENT*/}
+            {/*TITLE CONTENT*/}
         <div className='p-2 pb-3'>
-            {
-                item.setlist == "event" ? <h3 className='font-poppins text-sm text-red-500'>{item.acara}</h3> :
-                <h3 className='font-poppins mt-3 font-medium text-red-500'>{validateTitle}</h3>
-            }
+            <h3 className='font-poppins mt-3 font-medium text-red-500'>{item.title}</h3>
 
-{/*DATE CONTENT*/}
+            {/*DATE CONTENT*/}
             <div className="flex text-[13px] font-poppins text-gray-400 gap-x-1 mt-2">
                 {
                     item.setlist == "event" ? <p className='hidden'>{item.time}</p> : <p className='block'>{item.time},</p>
@@ -43,10 +41,14 @@ const scheduleCard = ({item}) => {
                 <p className='capitalize'>{item.date}</p>
             </div>
             
+            {/*MEMBER LENGTH CONTENT*/}
+            {
+            member?.length == 0 ? null : 
             <div className='flex items-center gap-x-3 mt-4'>
             <span className='text-red-500'><HiMiniUserGroup size={24} /></span>
             <h3 className='text-[14px] text-gray-400 font-poppins'>{member?.length} Member</h3>
             </div>
+            }
 
         </div>
 

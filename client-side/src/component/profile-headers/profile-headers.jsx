@@ -13,7 +13,7 @@ const profileHeader = ({avatar, updateAvatar}) => {
     <>
     <div className='flex p-2 gap-x-4 w-full'>
       <div className='h-24 w-24 flex relative flex-col items-center'>
-        <img src={`http://localhost:3000/assets/${avatar == "user" || !avatar ? 'f2.png' : avatar}`} 
+        <img src={`http://localhost:3000/assets/${avatar == "user" || avatar == 'admin' || !avatar ? 'f2.png' : avatar}`} 
         className='border-2 border-slate-700 w-24 h-24 rounded-full object-cover' alt="avatar user"/>
         
         <button onClick={() => setOpenModal(!openModal)} className='text-red-500 text-poppins cursor-pointer z-20 text-[16px] mt-2 font-medium'

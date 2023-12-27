@@ -64,7 +64,7 @@ const register = () => {
     }
     // If all validations pass, submit the form
     if (isValid) {
-      axios.post("http://localhost:3000/user/register", value)
+      axios.post("http://localhost:3000/api/v1/user/register", value)
         .then(res => {
           if (res.data.message === "CREATE NEW User Success") {
             navigate("/login");
