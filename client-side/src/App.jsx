@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom";
 import "./App.css";
 import axios from 'axios'
+import 'rsuite/styles/index.less';
 
 import Headers from "./component/headers/headers.jsx";
 import Navbar from "./component/navbar/navbar.jsx";
@@ -11,13 +12,13 @@ import MemberPage from "./pages/memberPage/memberPage.jsx";
 import Login from "./pages/loginPage/login.jsx";
 import Profile from "./pages/profilePage/profile.jsx";
 import Register from "./pages/registerPage/register.jsx";
-import {useEffect, useState} from 'react'
+
+
+
+// COMPONENT FOR ADMIN 
+import PostSchedule from './pages/admin/schedule/postSchedule.jsx'
+
 function App() {
-  axios.defaults.withCredentials = true
-  // useEffect(() => {
-  //   axios.get("http://localhost:3000/api/v1/user/profileUser")
-  // }, [])
-  
   
     return (
         <div className="container">
@@ -33,9 +34,11 @@ function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/profile" element={<Profile />} />
+                    <Route path="/admin/post/schedule" element={<PostSchedule />} />
                 </Routes>
                 <Navbar />
                 </div>
+                
             </Router>
         </div>
     );

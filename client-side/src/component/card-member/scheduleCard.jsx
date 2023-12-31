@@ -1,28 +1,35 @@
 import {Link} from 'react-router-dom'
-import { HiMiniUserGroup } from "react-icons/hi2";
+import { HiMiniUserGroup, HiOutlineTrash } from "react-icons/hi2";
 import { useState, useEffect } from "react";
 import {scheduleList, memberPerform} from '../../../libs/member-list.js'
+import { LuPencilLine } from "react-icons/lu";
 
-const scheduleCard = ({item}) => {
+const scheduleCard = ({item, isActive}) => {
   const [member, setMember] = useState([])
   const validateBg = item.setlist == 'rkj' ? 'before:bg-black' : item.setlist == 'cmr' ? 'bg-[#F7F5E8]' : item.setlist == 'trainee' ? 'bg-[#BCFFBC]' : null
   
-  const validateTitle = item.setlist == "rkj" ? 'aturan anti cinta' : item.setlist == 'cmr' ? 'cara meminum ramune' : item.setlist == 'trainee' ? 'trainee' : item.setlist == "tunas" ? "tunas di balik seragam" : null
-  
   const id = item.id
-  
+
+// GET MEMBER PERFORM ON BOTTOM
   const getMemberPerform = (id) => {
         memberPerform(`/memberPerform/${id}`)
         .then(datas => setMember(datas))
     }
+  
+
   useEffect(() => {
     getMemberPerform(id)
   }, [member])
   
+
+
+
+
+
   return(
     <Link to={`${item.setlist == "event" ? item.link : 
       `/detail/schedule/${item.id}`}`} className={`w-full shadow-md  rounded-lg overflow-hidden relative before:bg-red-500 
-         duration-500 cursor-default hover:-translate-y-3`} key={item.id}>
+         duration-500 cursor-default`} key={item.id}>
         
         <div className={`w-full h-32 z-20 relative object-cover relative before:absolute before:w-full before:h-full before:-z-10 before:
           ${validateBg}
@@ -49,9 +56,22 @@ const scheduleCard = ({item}) => {
             <h3 className='text-[14px] text-gray-400 font-poppins'>{member?.length} Member</h3>
             </div>
             }
-
+            
+            
+            {/*IS ADMIN LOGIN CONTENT*/}
+            {isActive ? 
+            <div className='flex items-center mt-3'>
+              <Link class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm text-center p-2 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 hover:cursor-pointer">
+              <LuPencilLine size={18}/>
+              </Link>
+              <Link class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm p-2 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 hover:cursor-pointer">
+              <HiOutlineTrash size={18}/>
+              </Link>
+            </div> : null
+            }
+            
+            
         </div>
-
     </Link>  
     
     

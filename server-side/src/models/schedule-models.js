@@ -25,7 +25,6 @@ const postSchedule = (req, res) => {
   })
 }
 
-
 // POST SCHEDULE AND MEMEBRPERFORM QUERY
 const scheduleAndMemberPerform = (req, res) => {
   const { setlist, title, date, time, link, acara, memberPerform } = req.body;
@@ -61,6 +60,31 @@ const scheduleAndMemberPerform = (req, res) => {
   );
 }
 
+// DELETE SCHEDULE QUERY
+const deleteScheduleQuery = (req, res) => {
+  const scheduleId = req.params.id; 
+  db.query('DELETE FROM membersPerform WHERE schedule_id = ?', [scheduleId], (err, memberResult) => {
+    if (err) {
+      console.error('Error deleting membersPerform:', err.message);
+      res.status(500).json({ error: 'Internal Server Error' });
+      return;
+    }
+
+    db.query('DELETE FROM schedule WHERE id = ?', [scheduleId], (err, scheduleResult) => {
+      if (err) {
+        console.error('Error deleting schedule:', err.message);
+        res.status(500).json({ error: 'Internal Server Error' });
+        return;
+      }
+
+      res.json({ message: 'Data deleted successfully', scheduleId });
+    });
+  });
+}
+
+
+
+
 
 
 // MEMBER PERFORM QUERY
@@ -81,6 +105,7 @@ module.exports={
   getSchedule,
   postSchedule,
   scheduleAndMemberPerform,
+  deleteScheduleQuery,
   getMemberPerform,
   
 }

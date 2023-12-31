@@ -9,7 +9,7 @@ const newsCard = ({ item }) => {
                 <SlCalender size={14} className="text-white" />
             </span>
             <h3 className="flex items-center mb-1 text-lg font-semibold text-gray-900 dark:text-white">
-                <img src={item.tema} className="w-16" />
+                <img src={`http://localhost:3000/news/images/${item.tema}.jpg`} className="w-16" />
             </h3>
             <time className="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
                 Released on {item.date}

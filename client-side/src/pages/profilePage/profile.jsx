@@ -65,7 +65,6 @@ const profile = () => {
     
   
   
-  
   return (
     <div className='pt-5 px-2 w-screen h-full'>
       <ProfileHeader avatar={data?.avatar} updateAvatar={handleUpdateAvatar} />
@@ -76,10 +75,6 @@ const profile = () => {
         
           <GrNotes size={60} className='text-red-600 mb-6'/>
           <span className='text-lg tracking-wide font-poppins font-medium'>Tidak ada blog untuk saat ini</span>
-        
-          
-          
-          
           
       </div>
       

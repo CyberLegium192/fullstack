@@ -15,28 +15,22 @@ router.post('/api/addMembers', (req, res) => {
 })
 
 // DELETE MEMBER PERFORM AND SCHEDULE
-router.delete('/delete/schedule/:id', (req, res) => {
-  const scheduleId = req.params.id; 
-  db.query('DELETE FROM membersPerform WHERE schedule_id = ?', [scheduleId], (err, memberResult) => {
-    if (err) {
-      console.error('Error deleting membersPerform:', err.message);
-      res.status(500).json({ error: 'Internal Server Error' });
-      return;
-    }
+router.delete('/delete/schedule/:id', (req, res) => scheduleController.deletePostSchedule(req, res))
 
-    db.query('DELETE FROM schedule WHERE id = ?', [scheduleId], (err, scheduleResult) => {
-      if (err) {
-        console.error('Error deleting schedule:', err.message);
-        res.status(500).json({ error: 'Internal Server Error' });
-        return;
-      }
-
-      res.json({ message: 'Data deleted successfully', scheduleId });
-    });
-  });
+// SEARCH SCHEDULE 
+router.get('/scheduleList/search', (req, res) => {
+  const title = req.query.q
+  
+  const sql = `SELECT * FROM schedule WHERE title LIKE ?`
+  
+  db.query(sql, [`%${title}%`], (err, results) => {
+    if(err) throw err
+    res.json({
+      message: 'success',
+      results
+    })
+  })
 })
-
-
 
 
 

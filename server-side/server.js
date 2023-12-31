@@ -24,6 +24,7 @@ app.use(cors({
 app.use('/assets', express.static('public/userProfile'))
 app.use('/profile', express.static('public/member-profile'))
 app.use('/schedule/images', express.static('public/schedule'))
+app.use('/news/images', express.static('public/schedule'))
 
 app.use("/api/v1/user", userRouter)
 app.use('/api/v1/member', memberRouter)

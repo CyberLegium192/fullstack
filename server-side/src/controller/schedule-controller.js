@@ -21,6 +21,14 @@ const postScheduleAndMember = async (req, res) => {
   await modelsSchedule.scheduleAndMemberPerform(req,res)
 }
 
+// DELTE POST SCHEDULE
+const deletePostSchedule = async (req, res) => {
+  await modelsSchedule.deleteScheduleQuery(req, res)
+}
+
+
+
+
 
 // GET MEMBER PERFORM 
 const getMemberPerform = async (req, res) => {
@@ -37,5 +45,6 @@ module.exports={
   getSchedule,
   postSchedule,
   postScheduleAndMember,
+  deletePostSchedule,
   getMemberPerform,
 }
