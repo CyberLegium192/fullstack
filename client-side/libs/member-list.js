@@ -15,19 +15,6 @@ export const liveShowroom = async (source) => {
 
 
 
-// SCHEDULE LIST
-export const scheduleList = async (source) => {
-  const response = await fetch(`${import.meta.env.VITE_BASE_API}/schedule/scheduleList/search?q=${source}`)
-  const data = await response.json()
-  return data.results
-}
-
-export const memberPerform = async (source) => {
-  const response = await fetch(`${import.meta.env.VITE_BASE_API}/schedule${source}`)
-  const data = await response.json()
-  return data.memberPerform
-}
-
 
 
 

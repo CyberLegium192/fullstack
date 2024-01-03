@@ -4,36 +4,54 @@ import Setlist from './selectSetlist.jsx'
 import DatePick from './datePicker.jsx'
 import TimePicker from './timePicker.jsx'
 import MemberPerform from './memberPerform.jsx'
+import {getScheduleId} from '../../../../libs/schedule.js'
+import {useParams} from 'react-router-dom'
 
 
-const postSchedule = () => {
-    const [values, setValues] = useState({})
+const editSchedule = () => {
+    const [values, setValues] = useState({
+      setlist : '',
+      title : '',
+      date : '',
+      time : '',
+      link : '',
+      memberPerform: [{member: ''}],
+    })
     const [valuesSetlist, setSetlist] = useState('');
-  
+    const {id} = useParams()
+    
+    
+    
+    const fetchingData = () => {
+      getScheduleId(id)
+      .then(resp => {
+        if (resp.setlist !== 'event.jpg') {
+          setValues({
+            setlist: resp.setlist,
+            title: resp.title,
+            date: resp.date,
+            time: resp.time,
+            link: resp.link,
+          })
+        }
+      })
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    useEffect(() => {
+      fetchingData()
+    }, [])
+    
     const handleClick = (e) => {
         e.preventDefault();
-        if (values.setlist !== 'event.jpg') {
-          alert(values.setlist)
-          axios.post('http://localhost:3000/api/v1/schedule/post/schedule/member', values)
-          .then(response => {
-            setTimeout(function () { location.href = '/schedule' }, 700);
-          })
-        .catch(error => {
-          console.error('Error posting data:', error.message);
-        });
-        }
-        else{
-          axios.post('http://localhost:3000/api/v1/schedule/post/schedule', values)
-            .then(response => {
-              setTimeout(function () { location.href = '/schedule' }, 700);
-            })
-            .catch(error => {
-              console.error('Error posting data:', error.message);
-            });
-        }
-        
-        
-        
+
     };
   
     
@@ -46,7 +64,7 @@ const postSchedule = () => {
                     values={values}
                     setValues={setValues}
                     name={"title"}
-                    title={"title"}
+                    title={values.title}
                 />
                 <div className='flex justify-between items-center gap-x-7 mb-6'>
                   <DatePick
@@ -120,4 +138,4 @@ const Input = ({ values, setValues, name, title }) => {
 
 
 
-export default postSchedule;
+export default editSchedule;

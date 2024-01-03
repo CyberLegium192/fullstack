@@ -48,12 +48,48 @@ const scheduleAndMemberPerform = (req, res) => {
         [memberInserts],
         (err, memberResult) => {
           if (err) {
+            throw err
             console.error('Error inserting membersPerform:', err.message);
             res.status(500).json({ error: 'Internal Server Error' });
             return;
           }
 
           res.json({ message: 'Data inserted successfully', scheduleId });
+        }
+      );
+    }
+  );
+}
+
+
+// GET SCHEDULE AND MEMEBRPERFORM QUERY
+const getScheduleAndMemberPerforms = (req, res) => {
+  const idSchedule = req.params.id
+  
+  // Insert data ke tabel schedule
+  db.query(`SELECT * FROM schedule WHERE id='${idSchedule}'`,
+    (err, scheduleResult) => {
+      if (err) {
+        console.error('Error inserting schedule:', err.message);
+        res.status(500).json({ error: 'Internal Server Error' });
+        return;
+      }
+      db.query(`SELECT * FROM membersPerform WHERE schedule_id='${idSchedule}'`,
+        (err, memberResult) => {
+          if (err) {
+            throw err
+            console.error('Error inserting membersPerform:', err.message);
+            res.status(500).json({ error: 'Internal Server Error' });
+            return;
+          }
+          const results = [
+            {
+              ...scheduleResult[0], // Assuming scheduleResult is an array with one element
+              memberPerform: memberResult,
+            }
+          ];
+
+          res.json({ message: 'Data inserted successfully', results});
         }
       );
     }
@@ -107,5 +143,5 @@ module.exports={
   scheduleAndMemberPerform,
   deleteScheduleQuery,
   getMemberPerform,
-  
+  getScheduleAndMemberPerforms,
 }

@@ -10,9 +10,14 @@ router.get("/scheduleList", (req, res) => scheduleController.getSchedule(req, re
 router.post("/post/schedule", (req, res) => scheduleController.postSchedule(req, res))
 
 // add schedule + member 
-router.post('/api/addMembers', (req, res) => {
+router.post('/post/schedule/member', (req, res) => {
   scheduleController.postScheduleAndMember(req, res)
 })
+// GET SCHEDULE AND MEMBER BY ID
+router.get('/detail/schedule/:id', (req, res) => {
+  scheduleController.getMemberAndSchedule(req, res)
+})
+
 
 // DELETE MEMBER PERFORM AND SCHEDULE
 router.delete('/delete/schedule/:id', (req, res) => scheduleController.deletePostSchedule(req, res))

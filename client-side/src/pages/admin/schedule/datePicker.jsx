@@ -1,14 +1,20 @@
-import { Datepicker } from 'flowbite-react';
+import { DatePicker, Space } from 'antd';
+import dayjs from 'dayjs';
 
 const datePicker = ({ values, setValues, name }) => {
-    const handleDateChange = (e) => {
-        setValues({ ...values, date: e.target.value });
-        console.log(e.target.value)
-    };
+    const onChange = (date, dateString) => {
+        setValues({...values, date: dateString})
+        
+      };
+      const dateFormatList = 'DD-MM-YYYY'
     return (
-      <div className="relative w-72">
-        <Datepicker onChange={handleDateChange}/>
+      <div className='w-full'>
+          <DatePicker defaultValue={dayjs('01-01-2024', dateFormatList)} format={dateFormatList} 
+          onChange={onChange}
+          size={'middle'}
+          className='w-full'/>
       </div>
+      
     );
 };
 

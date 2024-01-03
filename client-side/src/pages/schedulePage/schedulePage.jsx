@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import {scheduleList, memberPerform} from '../../../libs/member-list.js'
+import {scheduleList} from '../../../libs/schedule.js'
 import axios from "axios";
 import ScheduleCard from "../../component/card-member/scheduleCard.jsx";
 import {Link} from 'react-router-dom'
@@ -14,7 +14,10 @@ const schedulePage = () => {
     
     const handleSearch = () => {
         scheduleList(`${query.length < 3 ? '' : query}`)
-        .then(datas => setData(datas))
+        .then(datas => {
+          setData(datas)
+          // console.log(datas)
+        })
         const user = localStorage.getItem('user')
         setUser(user)
     }

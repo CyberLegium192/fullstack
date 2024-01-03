@@ -47,7 +47,7 @@ router.get("/profileUser", verifyToken, updateTokenAfterAvatarChange, (req, res)
   })
 })
 
-
+// CHANGE AVATAR
 router.patch('/profile/edit/avatar/:id', upload.single('avatar'), userController.updateAvatar, updateTokenAfterAvatarChange, (req, res) => {
   res.json({
     message: 'Update avatar success',
@@ -57,7 +57,11 @@ router.patch('/profile/edit/avatar/:id', upload.single('avatar'), userController
 // GET PERSONAL USER AFTER LOGIN
 router.get('/profilePage/:id', (req, res) => userController.getUser(req,res))
 
-
+// DELETE cookie
+router.get('/logout', (req, res) => {
+  res.clearCookie('token')
+  res.json({status: "success"})
+})
 
 
 

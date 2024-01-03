@@ -12,11 +12,13 @@ import MemberPage from "./pages/memberPage/memberPage.jsx";
 import Login from "./pages/loginPage/login.jsx";
 import Profile from "./pages/profilePage/profile.jsx";
 import Register from "./pages/registerPage/register.jsx";
+import Settings from "./pages/settings/settings.jsx";
 
 
 
 // COMPONENT FOR ADMIN 
 import PostSchedule from './pages/admin/schedule/postSchedule.jsx'
+import EditSchedule from './pages/admin/schedule/editSchedule.jsx'
 
 function App() {
   
@@ -32,9 +34,11 @@ function App() {
                     <Route path="/schedule" element={<SchedulePage />} />
                     <Route path="/member" element={<MemberPage />} />
                     <Route path="/login" element={<Login />} />
+                    <Route path="/profile/settings" element={<Settings />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/admin/post/schedule" element={<PostSchedule />} />
+                    <Route path="/admin/edit/schedule/:id" element={<EditSchedule />} />
                 </Routes>
                 <Navbar />
                 </div>
