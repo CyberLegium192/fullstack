@@ -4,6 +4,8 @@ import Setlist from './selectSetlist.jsx'
 import DatePick from './datePicker.jsx'
 import TimePicker from './timePicker.jsx'
 import MemberPerform from './memberPerform.jsx'
+import {postScheduleEvent, postScheduleMember} from "../../../../libs/schedule.js"
+import {postValidate} from "../../../../libs/scheduleValidate/validateFormSchedule.js"
 
 
 const postSchedule = () => {
@@ -12,30 +14,8 @@ const postSchedule = () => {
   
     const handleClick = (e) => {
         e.preventDefault();
-        if (values.setlist !== 'event.jpg') {
-          alert(values.setlist)
-          axios.post('http://localhost:3000/api/v1/schedule/post/schedule/member', values)
-          .then(response => {
-            setTimeout(function () { location.href = '/schedule' }, 700);
-          })
-        .catch(error => {
-          console.error('Error posting data:', error.message);
-        });
-        }
-        else{
-          axios.post('http://localhost:3000/api/v1/schedule/post/schedule', values)
-            .then(response => {
-              setTimeout(function () { location.href = '/schedule' }, 700);
-            })
-            .catch(error => {
-              console.error('Error posting data:', error.message);
-            });
-        }
-        
-        
-        
+        postValidate(values)
     };
-  
     
     return (
         <div className="mt-4 pb-24">

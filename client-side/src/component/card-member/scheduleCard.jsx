@@ -1,16 +1,25 @@
+import { useState, useEffect } from "react";
 import {Link} from 'react-router-dom'
 import { HiMiniUserGroup, HiOutlineTrash } from "react-icons/hi2";
-import { useState, useEffect } from "react";
-import {memberPerform, deleteSchedule} from '../../../libs/schedule.js'
 import { LuPencilLine } from "react-icons/lu";
 import {formatDate} from "../../../libs/formatDate.js"
+import {memberPerform, deleteSchedule} from '../../../libs/schedule.js'
+import {Button} from 'flowbite-react'
+
 
 const scheduleCard = ({item, isActive}) => {
-  const id = item.id
-  const dateString = item.date
   const [member, setMember] = useState([])
   const [date, setDate] = useState()
-  const validateBg = item.setlist == 'rkj.jpg' ? 'before:bg-black' : item.setlist == 'cmr.jpg' ? 'bg-[#F7F5E8]' : item.setlist == 'trainee.jpg' ? 'bg-[#BCFFBC]' : null
+  const id = item.id
+  const dateString = item.date
+  
+  const validateBg = item.setlist == 'rkj.jpg' ? 'bg-black' :
+    item.setlist == 'cmr.jpg' ? 'bg-[#00BEE2]' : 
+    item.setlist == 'trainee.jpg' ? 'bg-[#BCFFBC]' : 
+    item.setlist == 'panjama.jpg' ? 'bg-[#1E2337]' :
+    item.setlist == 'event.jpg' ? 'bg-[#2F5597]' : null
+  
+  
   
   useEffect(()=> {
     setDate(formatDate(dateString))
@@ -32,18 +41,17 @@ const scheduleCard = ({item, isActive}) => {
     } else{alert('batal menghapus ', + item.title)}
   }
   
-
   useEffect(() => {
     getMemberPerform(id)
   }, [member])
   
 
   return(
-    <div className={`w-full shadow-md rounded-lg overflow-hidden relative before:bg-red-500 no-underline duration-500 cursor-default`}>
+    <div className='w-[47%] shadow-lg rounded-lg overflow-hidden relative before:bg-red-500 hover:no-underline duration-500 cursor-default pb-3'>
     <Link to={`${item.setlist == "event.jpg" ? item.link : 
-      `/detail/schedule/${item.id}`}`} key={item.id}>
+      `/detail/schedule/${item.id}`}`} className='no-underline' key={item.id}>
         
-        <div className={`w-full h-32 z-20 relative object-cover relative before:absolute before:w-full before:h-full before:-z-10 before:
+        <div className={`w-full h-32 z-20 relative object-cover relative before:absolute before:w-full before:h-full before:-z-10
           ${validateBg}
         `}>
             <img src={`http://localhost:3000/schedule/images/${item.setlist}`} className='w-full h-full object-contain z-20' />
@@ -61,13 +69,15 @@ const scheduleCard = ({item, isActive}) => {
             </div>
             
             {/*MEMBER LENGTH CONTENT*/}
-            {
-            member?.length == 0 ? null : 
-            <div className='flex items-center gap-x-3 mt-1'>
+            {/*member?.length == 0 ?  null : */}
+            <div className={`items-center gap-x-3 
+              mt-1 flex`}>
               <span className='text-red-500'><HiMiniUserGroup size={22} /></span>
-              <h3 className='text-[14px] text-gray-400 font-poppins'>{member?.length} Member</h3>
+              <h3 className='text-[14px] text-gray-400 font-poppins'>
+                {member?.length == 0 ? 'no' : member.length } Member
+              </h3>
             </div>
-            }
+            
             
             
             
@@ -76,13 +86,24 @@ const scheduleCard = ({item, isActive}) => {
     </Link>  
             {/*IS ADMIN LOGIN CONTENT*/}
             {isActive ? 
-            <div className='flex items-center ml-3 gap-x-4 mt-3'>
-              <Link to={`/admin/edit/schedule/${id}`} className="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm text-center p-1 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 hover:cursor-pointer">
-              <LuPencilLine size={19}/>
-              </Link>
-              <button className="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm p-1 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 hover:cursor-pointer" onClick={(e) => handleDelete(e)}>
-              <HiOutlineTrash size={19}/>
-              </button>
+            <div className='absolute z-30 top-0 w-full'>
+              
+              {/*
+              <Button color="success" pill size='xs'
+                onClick={(e) => location.href=`/admin/edit/schedule/${id}`} className='p-1 h-10 w-10 cursor-pointer font-bold absolute -left-2 -top-2'>
+                <LuPencilLine size={20}/>
+              </Button> 
+              */}
+              <Link to={`/admin/edit/schedule/${id}`}
+                 className='h-10 w-10 cursor-pointer font-bold absolute -left-2 -top-2 flex items-center justify-center bg-green-600 rounded-full text-white'>
+                <LuPencilLine size={17}/>
+              </Link> 
+              <Button color="failure" pill size='xs'
+                onClick={(e) => handleDelete(e)} className='p-1 h-10 w-10 cursor-pointer font-bold
+                absolute -right-2 -top-2'>
+                <HiOutlineTrash size={17}/>
+              </Button> 
+              
             </div> : null
             }
     </div>

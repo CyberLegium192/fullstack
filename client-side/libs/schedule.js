@@ -1,4 +1,7 @@
+import axios from 'axios';
 
+
+// ==================== GETTING ==================== 
 // SCHEDULE LIST
 export const scheduleList = async (source) => {
   const response = await fetch(`${import.meta.env.VITE_BASE_API}/schedule/scheduleList/search?q=${source}`)
@@ -20,21 +23,50 @@ export const getScheduleId = async (id) => {
   return data.results[0]
 }
 
-// DELETE SCHEDULE 
-export const deleteSchedule = async (id) => {
-  const response = await fetch(`${import.meta.env.VITE_BASE_API}/schedule/${id}`, {
-    method: "DELETE"
-  })
-  const data = await response.json()
-  return data
+
+
+// ==================== POST ==================== 
+
+// POST SCHEDULE ONLY ||| EVENT
+export const postScheduleEvent = async (values) => {
+  const response = await axios.post(`${import.meta.env.VITE_BASE_API}/schedule/post/schedule`, values)
+    return response.data
+}
+
+
+// ==================== PATCH ==================== 
+// EDIT SCHEDULE EVENT
+export const updateScheduleEvent = async (id, values) => {
+  const response = await axios.patch(`${import.meta.env.VITE_BASE_API}/schedule/update/schedule/${id}`, values)
+  return response.data
+}
+export const updateScheduleMember = async (id, values) => {
+  const response = await axios.patch(`${import.meta.env.VITE_BASE_API}/schedule/update/member/${id}`, values)
+  return response.data
+}
+
+
+
+
+// POST SCHEDULE AND MEMBER ||| PERFORM
+export const postScheduleMember = async (values) => {
+  const response = await axios.post(`${import.meta.env.VITE_BASE_API}/schedule/post/schedule/member`, values)
+    return response.data
 }
 
 
 
 
 
-export const postScheduleEvent = async (value) => {
-  const response = await fetch(`${import.meta.env.VITE_BASE_API}/schedule/post/schedule`)
-    const data = await response.json()
-    return data.results
+
+
+
+
+
+
+// ==================== DELETE ==================== 
+// DELETE SCHEDULE 
+export const deleteSchedule = async (id) => {
+  const response = await axios.delete(`${import.meta.env.VITE_BASE_API}/schedule/${id}`)
+  return response.data
 }

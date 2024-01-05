@@ -3,10 +3,10 @@ import axios from 'axios'
 import Setlist from './selectSetlist.jsx'
 import DatePick from './datePicker.jsx'
 import TimePicker from './timePicker.jsx'
-import MemberPerform from './memberPerform.jsx'
-import {getScheduleId} from '../../../../libs/schedule.js'
+import MemberPerform from './editMemberPerform.jsx'
+import {getScheduleId, updateScheduleEvent, updateScheduleMember} from '../../../../libs/schedule.js'
 import {useParams} from 'react-router-dom'
-
+import {updateValidate} from "../../../../libs/scheduleValidate/validateFormSchedule.js"
 
 const editSchedule = () => {
     const [values, setValues] = useState({
@@ -17,10 +17,8 @@ const editSchedule = () => {
       link : '',
       memberPerform: [{member: ''}],
     })
-    const [valuesSetlist, setSetlist] = useState('');
+    
     const {id} = useParams()
-    
-    
     
     const fetchingData = () => {
       getScheduleId(id)
@@ -32,26 +30,30 @@ const editSchedule = () => {
             date: resp.date,
             time: resp.time,
             link: resp.link,
+            memberPerform: resp.memberPerform
+          })
+        } else{
+          setValues({
+            setlist: resp.setlist,
+            title: resp.title,
+            date: resp.date,
+            time: resp.time,
+            link: resp.link,
           })
         }
+        
       })
     }
     
     
-    
-    
-    
-    
-    
-    
-    
     useEffect(() => {
       fetchingData()
-    }, [])
+    }, [id])
     
     const handleClick = (e) => {
         e.preventDefault();
-
+        updateValidate(id, values)
+        
     };
   
     
@@ -89,8 +91,6 @@ const editSchedule = () => {
                     values={values}
                     setValues={setValues}
                     /> : null
-                  
-                  
                 }
                 
                 
@@ -127,9 +127,7 @@ const Input = ({ values, setValues, name, title }) => {
                 type="text"
                 name={name}
                 id="id"
-                onChange={e =>
-                    setValues({ ...values, [e.target.name]: e.target.value })
-                }
+                onChange={(e) => setValues({ ...values, [e.target.name]: e.target.value })}
                 className="block font-poppins py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             />
         </div>

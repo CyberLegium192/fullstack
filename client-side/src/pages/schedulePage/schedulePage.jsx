@@ -45,7 +45,7 @@ const schedulePage = () => {
         
         
         
-            <div className="mt-4 grid grid-cols-2 gap-x-5 gap-y-3">
+            <div className="mt-4 flex flex-wrap justify-between gap-y-5">
                 {data?.map(item => (
                     <ScheduleCard key={item.id} item={item} isActive={isActive}/>
                 ))}

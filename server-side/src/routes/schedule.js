@@ -6,21 +6,51 @@ const scheduleController = require('../controller/schedule-controller.js')
 // GET SCHEDULE LIST
 router.get("/scheduleList", (req, res) => scheduleController.getSchedule(req, res))
 
-// POST SCHEDULE
+// POST SCHEDULE 
+
 router.post("/post/schedule", (req, res) => scheduleController.postSchedule(req, res))
 
-// add schedule + member 
+// UPDATE DATA SCHEDULE
+router.patch("/update/schedule/:id", (req, res) => {
+  scheduleController.updateSchedule(req, res)
+})
+
+// POST SCHEDULE AND MEMEBER ||| PERFORM
 router.post('/post/schedule/member', (req, res) => {
   scheduleController.postScheduleAndMember(req, res)
 })
+
+
 // GET SCHEDULE AND MEMBER BY ID
 router.get('/detail/schedule/:id', (req, res) => {
   scheduleController.getMemberAndSchedule(req, res)
 })
 
 
+
+router.patch('/update/member/:id', (req, res) => {
+  scheduleController.updateScheduleMember(req, res)
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // DELETE MEMBER PERFORM AND SCHEDULE
 router.delete('/delete/schedule/:id', (req, res) => scheduleController.deletePostSchedule(req, res))
+
+
 
 // SEARCH SCHEDULE 
 router.get('/scheduleList/search', (req, res) => {

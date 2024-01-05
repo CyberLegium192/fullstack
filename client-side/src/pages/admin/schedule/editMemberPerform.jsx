@@ -1,7 +1,8 @@
 import { HiOutlineTrash } from "react-icons/hi2";
 import {useState, useEffect} from 'react'
-const memberPerform = ({values, setValues}) => {
+const editMemberPerform = ({values, setValues}) => {
   const [memberPerform, setData] = useState([{member:''}])
+  const [memberList, setMemberList] = useState([])
   
   
   const handleAddMember = (e) => {
@@ -22,14 +23,19 @@ const memberPerform = ({values, setValues}) => {
     setData(deleteValue)
   }
   
+  const handleMember = () => {
+    setData(values.memberPerform)
+  }
     return (
         <>
             <div className="mt-12 grid grid-cols-2 gap-x-7">
                 
-                
               {
+              
                 memberPerform.map((val, i) => <Input handleChange={handleChange} key={i} index={i} handleDelete={handleDelete} title={val.member}/>) 
+                
               }
+              
                 
                 
                 
@@ -43,6 +49,15 @@ const memberPerform = ({values, setValues}) => {
                 onClick={(e) => handleAddMember(e)}
             >
                 add 
+            </button>
+            </div>
+            <div className="w-28 mt-4">
+            <button
+                type="button"
+                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto text-center dark:bg-red-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 py-2 px-2 w-full capitalize"
+                onClick={(e) => handleMember()}
+            >
+                cek 
             </button>
             </div>
         </>
@@ -80,4 +95,4 @@ const Input = ({handleChange, handleDelete, index, title}) => {
     );
 };
 
-export default memberPerform;
+export default editMemberPerform;

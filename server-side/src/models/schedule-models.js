@@ -25,6 +25,22 @@ const postSchedule = (req, res) => {
   })
 }
 
+// UODATE SCHEDULE QUERY || EVENT SCHEDULE
+const updateQuery = (req, res) => {
+  const {setlist, title, date, time, link} = req.body
+  const id = req.params.id
+  const sql = `UPDATE schedule SET setlist = ?, title = ?, date = ?, time = ?, link = ?  WHERE id=${id}`
+  db.query(sql, [setlist, title, date, time, link], (err, schedule) => {
+    if (err) throw err
+    res.json({
+      message: 'success',
+      schedule
+    })
+  })
+}
+
+
+
 // POST SCHEDULE AND MEMEBRPERFORM QUERY
 const scheduleAndMemberPerform = (req, res) => {
   const { setlist, title, date, time, link, acara, memberPerform } = req.body;
@@ -34,7 +50,6 @@ const scheduleAndMemberPerform = (req, res) => {
     [setlist, title, date, time, link],
     (err, scheduleResult) => {
       if (err) {
-        console.error('Error inserting schedule:', err.message);
         res.status(500).json({ error: 'Internal Server Error' });
         return;
       }
@@ -49,7 +64,6 @@ const scheduleAndMemberPerform = (req, res) => {
         (err, memberResult) => {
           if (err) {
             throw err
-            console.error('Error inserting membersPerform:', err.message);
             res.status(500).json({ error: 'Internal Server Error' });
             return;
           }
@@ -57,6 +71,47 @@ const scheduleAndMemberPerform = (req, res) => {
           res.json({ message: 'Data inserted successfully', scheduleId });
         }
       );
+    }
+  );
+}
+
+
+// UPDATE SCHEDULE AND MEMBERPERFORM
+const updateScheduleMember = (req, res) => {
+  const {setlist, title, date, time, link, acara, memberPerform } = req.body;
+  const scheduleId = req.params.id
+  // Update data di tabel schedule
+  db.query(
+    'UPDATE schedule SET setlist=?, title=?, date=?, time=?, link=? WHERE id=?',
+    [setlist, title, date, time, link, scheduleId],
+    (err, scheduleResult) => {
+      if (err) {
+        throw err
+      }
+
+      // Hapus data lama di tabel membersPerform
+      db.query('DELETE FROM membersPerform WHERE schedule_id=?', [scheduleId], (deleteErr) => {
+        if (deleteErr) {
+          res.status(500).json({ error: 'Internal Server Error' });
+          return;
+        }
+
+        // Insert data baru ke tabel membersPerform
+        const memberInserts = memberPerform.map((member) => [scheduleId, member.member]);
+
+        db.query(
+          'INSERT INTO membersPerform (schedule_id, member) VALUES ?',
+          [memberInserts],
+          (insertErr, memberResult) => {
+            if (insertErr) {
+              res.status(500).json({ error: 'Internal Server Error' });
+              return;
+            }
+
+            res.json({ message: 'success', scheduleResult, memberResult,scheduleId });
+          }
+        );
+      });
     }
   );
 }
@@ -74,7 +129,7 @@ const getScheduleAndMemberPerforms = (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
         return;
       }
-      db.query(`SELECT * FROM membersPerform WHERE schedule_id='${idSchedule}'`,
+      db.query(`SELECT member FROM membersPerform WHERE schedule_id='${idSchedule}'`,
         (err, memberResult) => {
           if (err) {
             throw err
@@ -119,10 +174,6 @@ const deleteScheduleQuery = (req, res) => {
 }
 
 
-
-
-
-
 // MEMBER PERFORM QUERY
 const getMemberPerform = (req, res) => {
   const id = req.params.id
@@ -140,7 +191,9 @@ const getMemberPerform = (req, res) => {
 module.exports={
   getSchedule,
   postSchedule,
+  updateQuery,
   scheduleAndMemberPerform,
+  updateScheduleMember,
   deleteScheduleQuery,
   getMemberPerform,
   getScheduleAndMemberPerforms,
