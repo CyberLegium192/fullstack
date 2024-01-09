@@ -4,6 +4,7 @@ import axios from "axios"
 const setting = () => {
   axios.defaults.withCredentials = true
   const handleClick =()=>{
+    localStorage.removeItem('user')
     axios.get("http://localhost:3000/api/v1/user/logout")
     .then(resp => {
       if (resp.data.status == "success") {

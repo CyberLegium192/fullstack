@@ -1,15 +1,18 @@
-const db = require('../utils/db.js')
+const newsModels = require("../models/news-models.js");
 
-const getNews = (req, res) => {
-  const sql = `SELECT * FROM news`
-  db.query(sql, (err, news) => {
-    if (err) throw err
-    res.json({
-      message: 'success',
-      news
-    })
-  })
+// GET NEWS LIST  
+const getNews =async (req, res) => {
+  await newsModels.getListNews(req, res)
+}
+
+// POST NEWS
+const postNews = async (req, res) => {
+  await newsModels.postNews(req, res)
 }
 
 
-module.exports = {getNews}
+
+module.exports = {
+  getNews,
+  postNews
+}

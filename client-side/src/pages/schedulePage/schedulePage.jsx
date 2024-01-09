@@ -4,11 +4,11 @@ import axios from "axios";
 import ScheduleCard from "../../component/card-member/scheduleCard.jsx";
 import {Link} from 'react-router-dom'
 
-const schedulePage = () => {
+const schedulePage = ({isActive}) => {
     const [data, setData] = useState([]);
     const [query, setQuery] = useState('');
     const [user, setUser] = useState('');
-    const [isActive, setIsActive] = useState(false);
+    // const [isActive, setIsActive] = useState(false);
     const admin = import.meta.env.VITE_ADMIN_ROLE
     
     
@@ -16,17 +16,11 @@ const schedulePage = () => {
         scheduleList(`${query.length < 3 ? '' : query}`)
         .then(datas => {
           setData(datas)
-          // console.log(datas)
         })
-        const user = localStorage.getItem('user')
-        setUser(user)
     }
     
     useEffect(() => {
         handleSearch()
-        if (user == admin) {
-          setIsActive(true)
-        } else{setIsActive(false)}
     }, [data]);
     
     
@@ -40,7 +34,7 @@ const schedulePage = () => {
         <Form handleSearch={handleSearch} setQuery={setQuery} />
         
         {isActive ? 
-        <Link to='/admin/post/schedule' class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm font-poppins px-5 py-2.5 text-center me-2 mt-5 inline-block dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 hover:cursor-pointer">Add</Link>
+        <Link to='/admin/post/schedule' className="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm font-poppins px-5 py-2.5 text-center me-2 mt-5 inline-block dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 hover:cursor-pointer">Add</Link>
         : null }
         
         

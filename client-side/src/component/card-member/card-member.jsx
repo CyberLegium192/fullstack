@@ -11,7 +11,6 @@ const Card = ({item}) => {
       <h3 className="text-center font-poppins font-medium text-red-700">{item.showall} Show</h3>
       
       <h3 className="text-center font-poppins font-bold text-red-700 -mt-3 w-24 text-[16px]">{item.callname}</h3>
-      
     </Link>
     )
 }

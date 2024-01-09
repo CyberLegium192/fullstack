@@ -2,7 +2,7 @@ import { Button, Checkbox, Label, TextInput } from 'flowbite-react';
 import {useState, useEffect} from "react"
 import axios from "axios"
 import {useNavigate, Link} from "react-router-dom"
-
+import {registerUser} from '../../../libs/userLogin.js'
 
 const register = () => {
   const navigate = useNavigate()
@@ -28,7 +28,6 @@ const register = () => {
     return emailRegex.test(email);
   };
   const validatePassword = (password) => {
-    // Add additional password requirements if needed
     return password.length >= 6;
   };
   
@@ -64,18 +63,14 @@ const register = () => {
     }
     // If all validations pass, submit the form
     if (isValid) {
-      axios.post("http://localhost:3000/api/v1/user/register", value)
+      registerUser(value)
         .then(res => {
-          if (res.data.message === "CREATE NEW User Success") {
+          if (res.message === "CREATE NEW User Success") {
             navigate("/login");
           } else {
             alert("Please check the form again");
           }
         })
-        .catch(error => {
-          // Handle Axios request error
-          alert("An error occurred during registration");
-        });
     }
   };
 

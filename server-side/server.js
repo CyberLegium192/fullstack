@@ -21,26 +21,22 @@ app.use(cors({
   credentials: true
 }))
 
+// IMAGE ROUTE
 app.use('/assets', express.static('public/userProfile'))
 app.use('/profile', express.static('public/member-profile'))
 app.use('/schedule/images', express.static('public/schedule'))
-app.use('/news/images', express.static('public/schedule'))
+app.use('/news/images', express.static('public/news'))
 
+
+
+
+// API ROUTE
 app.use("/api/v1/user", userRouter)
 app.use('/api/v1/member', memberRouter)
 app.use('/api/v1/schedule', scheduleRouter)
 app.use('/api/v1/news', newsRouter)
 
 
-
-
-
-
-
-
-
-
 app.listen(3000, () => {
   console.log("server running")
-  
 })
