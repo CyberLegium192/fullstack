@@ -12,6 +12,12 @@ export default {
         poppins: ["Poppins", "sans-serif"]
       }
     },
+    screens: {
+      'handphone': '320px',
+      'tablet': '640px',
+      'laptop': '1024px',
+      'desktop': '1280px',
+    },
   },
   plugins: [
      require('flowbite/plugin')

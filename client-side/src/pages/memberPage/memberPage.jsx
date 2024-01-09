@@ -27,7 +27,7 @@ const memberPage = () => {
   
   return (
     <div className="p-3 pt-6 pb-14">
-      <h2 className='text-xl font-poppins text-red-600 font-medium'>member live showroom</h2>
+      <h1 className='text-lg font-poppins text-red-600 font-medium'>member live showroom</h1>
 
       <LiveCarousel live={live}/>
       

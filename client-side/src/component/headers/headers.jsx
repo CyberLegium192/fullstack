@@ -7,7 +7,7 @@ const headers = () => {
         <div className="bg-red-600 sticky top-0 w-full p-1 flex justify-between items-end z-50 text-white">
             <div className="bg-red-600 sticky top-0 w-full p-3 flex justify-between items-end z-50">
                 <div className="w-24">
-                    <img src={Logo} className="w-full" alt="Logo"/>
+                    <img src={Logo} className="w-13" alt="Logo"/>
                 </div>
                 <div className="flex gap-x-3">
                     <Link className="text-white" aria-label="Settings" to="/profile/settings">

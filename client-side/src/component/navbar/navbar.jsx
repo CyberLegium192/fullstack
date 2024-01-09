@@ -36,8 +36,8 @@ const navbar = () => {
     };
 
     return (
-        <div className="max-w-screen-sm fixed bottom-0  font-poppins z-50">
-            <div className="w-full fixed bottom-0 p-2 font-poppins ">
+        <div className="w-[640px] fixed bottom-0  font-poppins z-50">
+            <div className=" p-2 font-poppins">
                 <BottomNavigation
                     value={value}
                     onChange={handleChange}
