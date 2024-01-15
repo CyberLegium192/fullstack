@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer components {
+  .inputLabel{
+    @apply block mb-3 text-lg font-medium text-gray-900 dark:text-white font-poppins 
+  }
+  .inputLabelRadio{
+    @apply ms-2 text-[16px] font-medium text-black dark:text-gray-500 font-poppins 
+  }
+  .inputRadio{
+    @apply w-5 h-5 text-red-600 bg-gray-100 border-gray-300 focus:ring-red-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-1 dark:bg-gray-700 dark:border-gray-600
+  }
+  .inputField{
+    @apply bg-gray-50 border border-gray-300 text-gray-900 text-base rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500 font-poppins 
+  }
+}
+
+
+
+
+
+body{
+    margin: 0 auto; /* Memusatkan body di layar desktop */
+    max-width: 600px; /* Ukuran tetap untuk layar hp */
+}
+.text-normal{
+  font-size: 16px;
+}
+
+
+
+
+
+@media screen and (max-width: 600px) {
+  body {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 768px) {
+  body {
+    width: 100%;
+  }
+  .Isrespoonsive{
+    width: 768px;
+  }
+}
