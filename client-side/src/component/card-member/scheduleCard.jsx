@@ -12,6 +12,7 @@ const scheduleCard = ({item, isActive}) => {
   const [date, setDate] = useState()
   const id = item.id
   const dateString = item.date
+  const IMAGE_URL = import.meta.env.VITE_BASE_URL_IMAGE;
   
   const validateBg = item.setlist == 'rkj.jpg' ? 'bg-black' :
     item.setlist == 'cmr.jpg' ? 'bg-[#00BEE2]' : 
@@ -54,7 +55,7 @@ const scheduleCard = ({item, isActive}) => {
         <div className={`w-full h-32 z-20 relative object-cover relative before:absolute before:w-full before:h-full before:-z-10
           ${validateBg}
         `}>
-            <img src={`http://localhost:3000/schedule/images/${item.setlist}`} className='w-full h-full object-contain z-20' />
+            <img src={`${IMAGE_URL}/schedule/images/${item.setlist}`} className='w-full h-full object-contain z-20' />
         </div>
             {/*TITLE CONTENT*/}
         <div className='px-3'>
@@ -67,6 +68,11 @@ const scheduleCard = ({item, isActive}) => {
                 }
                 <span className='capitalize'>{date}</span>
             </div>
+            
+            
+            
+            
+            
             
             {/*MEMBER LENGTH CONTENT*/}
             {/*member?.length == 0 ?  null : */}

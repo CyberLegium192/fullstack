@@ -1,6 +1,7 @@
 import {Link} from 'react-router-dom'
 const liveCard = ({item}) => {
-  
+
+
   return(
     <a href={`${item.streaming_url_list[0].url}`}>
     <div  className='relative w-full h-44 w-full'>

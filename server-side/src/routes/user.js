@@ -30,9 +30,7 @@ const generateToken = (userId, avatar) => {
 const updateTokenAfterAvatarChange = (req, res, next) => {
   const { userId, avatar } = req;
   const token = generateToken(userId, avatar);
-  res.cookie('token', token, { expires: new Date(Date.now() + 2 * 60 * 60 * 1000),
-    sameSite: "None",  
-    secure: false
+  res.cookie('token', token, { expires: new Date(Date.now() + 2 * 60 * 60 * 1000)
   })
   res.locals.newToken = token
   next();

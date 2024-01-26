@@ -2,7 +2,7 @@ const db = require("../utils/db.js");
 
 // GET MEMBER LIST
 const getMemberList = (req, res) => {
-  const sql = `SELECT id, callname, status, profile, showall, gen FROM member`
+  const sql = `SELECT id, callname, status, profile, showall, gen, birthday FROM member`
   db.query(sql, (err, results) => {
     if (err) throw err
     res.json({

@@ -13,7 +13,6 @@ const memberPage = () => {
     const memberLive = () => {
     liveShowroom('onlives')
       .then(resp => {
-        console.log(resp.data)
         setLive(resp.data)
       })
     }
@@ -31,7 +30,7 @@ const memberPage = () => {
 
       <LiveCarousel live={live}/>
       
-      <div className="w-full grid grid-cols-4 justify-start gap-x-3 "> 
+      <div className="w-full grid grid-cols-4 justify-start gap-x-3 mt-5"> 
         {
           data?.map((item) => <Card item={item} key={item.id}/> )
        }

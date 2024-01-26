@@ -16,9 +16,13 @@ import Register from "./pages/registerPage/register.jsx";
 import Settings from "./pages/settings/settings.jsx";
 import EditBIo from "./pages/editBio/editBio.jsx";
 
+// ================== SINGGLE PAGE  =========================
+import DetailMember from "./pages/memberPage/detailMember.jsx";
+import DetailSchedule from "./pages/schedulePage/detailSchedule.jsx";
+
+
 
 // =============== COMPONENT FOR ADMIN ======================
-
 // NEWS COMPONENT
 import PostSchedule from './pages/admin/schedule/postSchedule.jsx'
 import EditSchedule from './pages/admin/schedule/editSchedule.jsx'
@@ -61,24 +65,24 @@ function App() {
                     <Route path="/beranda" element={<HomePage />} />
                     <Route path="/news" element={<NewsPage isActive={isActive} />} />
                     <Route path="/schedule" element={<SchedulePage isActive={isActive} />} />
+                    <Route path="/detail/schedule/:id" element={<DetailSchedule />} />
                     <Route path="/member" element={<MemberPage />} />
+                    <Route path="/member/:id" element={<DetailMember />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/profile/settings" element={<Settings />} />
                     <Route path="/profile/edit/user/:id" element={<EditBIo />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/profile" element={<Profile />} />
                     
-                    {/*ADMIN ROUTE*/}
                     
+                    
+                    
+                    
+                    {/*ADMIN ROUTE*/}
                     <Route path="/admin/post/schedule" element={<PostSchedule />} />
                     <Route path="/admin/edit/schedule/:id" element={<EditSchedule />} />
                     <Route path="/admin/post/news" element={<PostNews />} />
                     <Route path="/admin/edit/news/:id" element={<EditNews />} />
-                    
-                    
-                    
-                    
-                    
                     
                 </Routes>
                 <Navbar />

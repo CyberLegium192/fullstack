@@ -28,20 +28,20 @@ const newsCard = ({ item, isActive }) => {
       })
     } else{alert(`batal menghapus ${item.title}`)}
   }
-
+  const IMAGE_URL = import.meta.env.VITE_BASE_URL_IMAGE;
 
 
 
     return (
         <li className="mb-6 ms-6 relative shadow-md rounded-md border border-red-600">
-          <Link to={item.link} className=''>
-            <span className="absolute flex items-center justify-center w-6 h-6 bg-red-600 rounded-full -start-3 ring-8 ring-white dark:ring-red-800 dark:bg-red-700 -left-9">
+          <Link to={item.link} className='relative'>
+            <span className="absolute flex items-center justify-center w-6 h-6 bg-red-600 rounded-full ring-8 ring-white dark:ring-red-800 dark:bg-red-700 -left-[36px]">
                 <SlCalender size={14} className="text-white" />
             </span>
             
             <div className='pl-4 p-3'>
             <h3 className="flex items-center mb-1  font-semibold text-gray-900 dark:text-white">
-                <img src={`http://localhost:3000/news/images/${item.tema}.jpg`} className="w-16" />
+                <img src={`${IMAGE_URL}/news/images/${item.tema}.jpg`} className="w-16" />
             </h3>
             <time className="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500 mt-2">
                 Released on {date}

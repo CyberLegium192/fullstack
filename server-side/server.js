@@ -8,6 +8,7 @@ const userRouter = require("./src/routes/user.js")
 const memberRouter = require("./src/routes/member.js")
 const scheduleRouter = require("./src/routes/schedule.js")
 const newsRouter = require("./src/routes/news.js")
+const merchRouter = require("./src/routes/merch.js")
 const path = require('path')
 
 app.use(express.json())
@@ -28,16 +29,18 @@ app.use('/profile', express.static('public/member-profile'))
 app.use('/schedule/images', express.static('public/schedule'))
 app.use('/news/images', express.static('public/news'))
 
-
-
-
 // API ROUTE
 app.use("/api/v1/user", userRouter)
 app.use('/api/v1/member', memberRouter)
 app.use('/api/v1/schedule', scheduleRouter)
 app.use('/api/v1/news', newsRouter)
+app.use('/api/v1/merch', merchRouter)
 
 
 app.listen(3000, () => {
   console.log("server running")
 })
+
+
+
+

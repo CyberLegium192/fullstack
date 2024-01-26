@@ -1,7 +1,10 @@
 import { HiOutlineTrash } from "react-icons/hi2";
 import {useState, useEffect} from 'react'
+import {memberList} from "/libs/member-list.js"
+
 const memberPerform = ({values, setValues}) => {
   const [memberPerform, setData] = useState([{member:''}])
+  const [member, setMember] = useState([])
   
   
   const handleAddMember = (e) => {
@@ -22,18 +25,18 @@ const memberPerform = ({values, setValues}) => {
     setData(deleteValue)
   }
   
+  useEffect(() => {
+    memberList("member/memberList")
+    .then(res => setMember(res))
+  }, [])
+  
     return (
         <>
             <div className="mt-12 grid grid-cols-2 gap-x-7">
-                
-                
+            
               {
-                memberPerform.map((val, i) => <Input handleChange={handleChange} key={i} index={i} handleDelete={handleDelete} title={val.member}/>) 
+                memberPerform.map((val, i) => <Input handleChange={handleChange} key={i} index={i} handleDelete={handleDelete} title={val.member} member={member}/>) 
               }
-                
-                
-                
-                
                 
             </div>
             <div className="w-28">
@@ -53,7 +56,7 @@ const memberPerform = ({values, setValues}) => {
 
 
 
-const Input = ({handleChange, handleDelete, index, title}) => {
+const Input = ({handleChange, handleDelete, index, title, member}) => {
     return (
         <div className="flex">
             <div className="relative z-0 w-full mb-5 group">

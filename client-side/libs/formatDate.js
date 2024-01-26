@@ -4,7 +4,6 @@ export const formatDate = (dateString) => {
         'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
         'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
       ];
-      const monthName = monthNames[month - 1]; // Mengambil nama bulan berdasarkan nomor bulan
-    
+      const monthName = monthNames[month - 1]; 
       return `${day} ${monthName} ${year}`;
 }
