@@ -1,6 +1,15 @@
 import { HiOutlineTrash } from "react-icons/hi2";
 import {useState, useEffect} from 'react'
 import {memberList} from "/libs/member-list.js"
+import { MultiSelect } from "react-multi-select-component";
+import axios from "axios"
+
+const options = [
+  { member: "ashel", value: "ashel" },
+  { member: "gita 🥭", value: "gita" },
+  { member: "shani 🥭", value: "shani" },
+  { member: "gracia 🥭", value: "gracia" },
+];
 
 const memberPerform = ({values, setValues}) => {
   const [memberPerform, setData] = useState([{member:''}])
@@ -30,14 +39,16 @@ const memberPerform = ({values, setValues}) => {
     .then(res => setMember(res))
   }, [])
   
+  
     return (
         <>
+        
             <div className="mt-12 grid grid-cols-2 gap-x-7">
             
               {
                 memberPerform.map((val, i) => <Input handleChange={handleChange} key={i} index={i} handleDelete={handleDelete} title={val.member} member={member}/>) 
               }
-                
+              
             </div>
             <div className="w-28">
             <button

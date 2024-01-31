@@ -7,11 +7,11 @@ const con = mysql.createConnection({
   database: `${process.env.DATABASE_NAME}`,
 })
 // const con = mysql.createConnection({
-//   host: 'mysql-160679-0.cloudclusters.net',
-//   port: "17201",
-//   user: 'admin',
-//   password: 'rT2EXBDN',
-//   database: 'ngidol'
+//   host: `${process.env.DATABASE_HOST}`,
+//   port: `${process.env.DATABASE_PORT}`,
+//   user: `${process.env.DATABASE_USER}`,
+//   password: `${process.env.DATABASE_PASS}`,
+//   database: `${process.env.DATABASE_NAME}`
 // })
 
 module.exports = con

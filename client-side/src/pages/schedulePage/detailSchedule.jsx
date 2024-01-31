@@ -2,64 +2,71 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { formatDate } from "../../../libs/formatDate.js";
 import { getScheduleId } from "../../../libs/schedule.js";
+import { memberList } from "../../../libs/member-list.js";
 import ScheduleDetail from "../../component/detail/scheduleDetail.jsx";
+import Card from '../../component/card-member/card-member.jsx'
 
 const scheduleDetail = () => {
     const [data, setData] = useState([]);
     const [memberData, setMember] = useState([]);
+    const [memberListData, setMemberList] = useState([]);
+    const [filteredData, setFilteredData] = useState([]);
     const [date, setDate] = useState();
+    
+
+    const validateBg = data.setlist == "rkj.jpg" ? "bg-black" : data.setlist == "cmr.jpg" ? "bg-[#00BEE2]" : data.setlist == "trainee.jpg" ? "bg-[#BCFFBC]" : data.setlist == "panjama.jpg" ? "bg-[#1E2337]" : data.setlist == "event.jpg" ? "bg-[#2F5597]" : null;
+    
     const { id } = useParams();
     const IMAGE_URL = import.meta.env.VITE_BASE_URL_IMAGE;
-
-    const validateBg =
-        data.setlist == "rkj.jpg"
-            ? "bg-black"
-            : data.setlist == "cmr.jpg"
-            ? "bg-[#00BEE2]"
-            : data.setlist == "trainee.jpg"
-            ? "bg-[#BCFFBC]"
-            : data.setlist == "panjama.jpg"
-            ? "bg-[#1E2337]"
-            : data.setlist == "event.jpg"
-            ? "bg-[#2F5597]"
-            : null;
-
     useEffect(() => {
         getScheduleId(id).then(res => {
             setData(res);
             setMember(res.memberPerform);
             setDate(formatDate(res.date));
         });
+
     }, [memberData]);
+    
+    useEffect(() => {
+        memberList("member/memberList").then(res => {
+          setMemberList(res)
+        })
+        const filteredData = memberListData.filter(member =>
+          memberData.some(memberList => memberList.member.toLowerCase() === member.callname.toLowerCase())
+        );
+        setFilteredData(filteredData);
+    }, [memberData, memberListData]);
+
 
     return (
-        <section>
-            <div
-                className={`w-full h-60 z-20 relative object-cover relative before:absolute before:w-full before:h-full before:-z-10
-          ${validateBg}
-        `}
-            >
-                <img
-                    src={`${IMAGE_URL}/schedule/images/${data.setlist}`}
-                    className="w-full h-full object-contain z-20"
-                />
+        <section className='pb-20'>
+            <div className={`w-full h-60 z-20 relative object-cover relative before:absolute before:w-full before:h-full before:-z-10 ${validateBg}`}>
+                <img src={`${IMAGE_URL}/schedule/images/${data.setlist}`} className="w-full h-full object-contain z-20" />
             </div>
 
             <ScheduleDetail data={data} date={date} />
-          <div className='px-5'>
+          <div className='px-5 mt-5'>
             {memberData.length == 1 ? (
                 <p className="font-poppins text-black capitalize text-lg font-medium">
                     ulang tahun
                 </p>
             ) : (
-                <p className="font-poppins text-black capitalize text-lg font-medium">
+                <p className="font-poppins text-black capitalize text-xl font-medium">
                     member perform
                 </p>
             )}
-            {memberData[0]?.member}
+          </div>
+          
+          {/* <Mapping /> */}
+          <div className="w-full grid grid-cols-4 gap-x-3 mt-5 px-5"> 
+          {
+            filteredData.map(item => <Card item={item} />)
+          }
           </div>
         </section>
     );
 };
 
 export default scheduleDetail;
+
+

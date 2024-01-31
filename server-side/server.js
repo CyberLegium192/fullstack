@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cors({
   origin: ["http://localhost:5173", 
-  "http://localhost:5174", "https://ngidol48.vercel.app"],
+  "http://localhost:5174", "http://localhost:8158", "https://ngidol48.vercel.app"],
   methods: ['GET', 'POST', 'PATCH', 'DELETE'],
   credentials: true
 }))

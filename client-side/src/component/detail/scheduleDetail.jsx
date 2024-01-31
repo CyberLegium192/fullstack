@@ -7,7 +7,7 @@ const scheduleDetail = ({ data, date }) => {
 
     return (
         <div className="px-5 pt-14">
-            <h3 className="font-poppins text-[22px] text-red-500 font-[600] capitalize">
+            <h3 className="font-poppins text-[25px] text-red-600 font-[580] capitalize">
                 {data.title}
             </h3>
 
@@ -17,7 +17,7 @@ const scheduleDetail = ({ data, date }) => {
 
             <Link
                 to={data.link}
-                className="py-2 px-6 hover:text-red-500 ring-2 ring-red-500 rounded-lg text-red-500 my-5 inline-block font-poppins text-base font-semibold capitalize"
+                className="py-2 px-6 hover:text-red-500 ring-2 ring-red-500 rounded-xl text-red-500 my-5 inline-block font-poppins text-lg font-semibold capitalize"
             >
                 tiket dan info lebih lanjut
             </Link>
