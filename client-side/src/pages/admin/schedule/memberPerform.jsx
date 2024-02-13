@@ -4,13 +4,6 @@ import {memberList} from "/libs/member-list.js"
 import { MultiSelect } from "react-multi-select-component";
 import axios from "axios"
 
-const options = [
-  { member: "ashel", value: "ashel" },
-  { member: "gita 🥭", value: "gita" },
-  { member: "shani 🥭", value: "shani" },
-  { member: "gracia 🥭", value: "gracia" },
-];
-
 const memberPerform = ({values, setValues}) => {
   const [memberPerform, setData] = useState([{member:''}])
   const [member, setMember] = useState([])
@@ -50,6 +43,8 @@ const memberPerform = ({values, setValues}) => {
               }
               
             </div>
+            
+            
             <div className="w-28">
             <button
                 type="button"

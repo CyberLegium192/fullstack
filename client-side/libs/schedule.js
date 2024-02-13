@@ -9,6 +9,22 @@ export const scheduleList = async (source) => {
   return data.results
 }
 
+
+
+// TEST 
+export const validateBg = (item) => {
+  const results = item.setlist == 'aturan anti cinta' ? 'bg-black' :
+    item.setlist == 'cara meminum ramune' ? 'bg-[#00BEE2]' : 
+    item.setlist == 'trainee' ? 'bg-[#BCFFBC]' : 
+    item.setlist == 'pajama drive' ? 'bg-[#1E2337]' : 'bg-[#2F5597]'
+    return results
+}
+
+
+
+
+
+
 // GET MEMBER PERFORM
 export const memberPerform = async (source) => {
   const response = await fetch(`${import.meta.env.VITE_BASE_API}/schedule${source}`)

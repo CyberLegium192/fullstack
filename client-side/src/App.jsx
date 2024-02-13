@@ -16,6 +16,12 @@ import Register from "./pages/registerPage/register.jsx";
 import Settings from "./pages/settings/settings.jsx";
 import EditBIo from "./pages/editBio/editBio.jsx";
 
+// SONGS
+import SongsPage from "./pages/songs/songs.jsx";
+import SongsDetails from "./pages/songs/songDetail.jsx";
+import SearchSong from "./pages/songs/searchSong.jsx";
+import SetlistSong from "./pages/songs/setlistSong.jsx";
+
 // ================== SINGGLE PAGE  =========================
 import DetailMember from "./pages/memberPage/detailMember.jsx";
 import DetailSchedule from "./pages/schedulePage/detailSchedule.jsx";
@@ -37,9 +43,6 @@ function App() {
     const [user, setUser] = useState('');
     const [isActive, setIsActive] = useState(false);
     const admin = import.meta.env.VITE_ADMIN_ROLE
-  
-  const  authToken = () => {
-  }
   
   useEffect(() => {
     const user = localStorage.getItem('user')
@@ -63,6 +66,15 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Navigate to="/beranda" />} />
                     <Route path="/beranda" element={<HomePage />} />
+                    <Route path="/lagu" element={<SongsPage  />} />
+                    <Route path="/lagu/:title" element={<SongsDetails  />} />
+                    <Route path="/lagu/album" element={<SearchSong  />} />
+                    <Route path="/lagu/album/:setlist" element={<SetlistSong  />} />
+                    
+                    
+                    
+                    
+                    
                     <Route path="/news" element={<NewsPage isActive={isActive} />} />
                     <Route path="/schedule" element={<SchedulePage isActive={isActive} />} />
                     <Route path="/detail/schedule/:id" element={<DetailSchedule />} />

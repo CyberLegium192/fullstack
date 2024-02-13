@@ -14,10 +14,10 @@ const scheduleCard = ({item, isActive}) => {
   const dateString = item.date
   const IMAGE_URL = import.meta.env.VITE_BASE_URL_IMAGE;
   
-  const validateBg = item.setlist == 'rkj.jpg' ? 'bg-black' :
-    item.setlist == 'cmr.jpg' ? 'bg-[#00BEE2]' : 
+  const validateBg = item.setlist == 'aturan anti cinta.jpg' ? 'bg-black' :
+    item.setlist == 'cara meminum ramune.jpg' ? 'bg-[#00BEE2]' : 
     item.setlist == 'trainee.jpg' ? 'bg-[#BCFFBC]' : 
-    item.setlist == 'panjama.jpg' ? 'bg-[#1E2337]' :
+    item.setlist == 'pajama drive.jpg' ? 'bg-[#1E2337]' :
     item.setlist == 'event.jpg' ? 'bg-[#2F5597]' : null
   
   
@@ -59,7 +59,7 @@ const scheduleCard = ({item, isActive}) => {
         </div>
             {/*TITLE CONTENT*/}
         <div className='px-3'>
-            <h3 className='font-poppins mt-3 font-medium text-red-500'>{item.title}</h3>
+            <h3 className='font-poppins mt-3 leading-4 mb-2 font-medium text-red-500'>{item.title}</h3>
 
             {/*DATE CONTENT*/}
             <div className="flex items-center text-[13px] font-poppins text-gray-400 gap-x-1">
@@ -79,9 +79,9 @@ const scheduleCard = ({item, isActive}) => {
             <div className={`items-center gap-x-3 
               mt-1 flex`}>
               <span className='text-red-500'><HiMiniUserGroup size={22} /></span>
-              <h3 className='text-[14px] text-gray-400 font-poppins'>
+              <p className='text-[14px] text-gray-400 font-poppins'>
                 {member?.length == 0 ? 'no' : member.length } Member
-              </h3>
+              </p>
             </div>
             
             

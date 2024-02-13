@@ -10,7 +10,7 @@ const tema = ({ name, values, setValues }) => {
             onChange={e => setValues({ ...values, [e.target.name]: e.target.value })
             }
           >
-            <option defaultValue>{titleVal}</option>
+            <option defaultValue>Choose Tema</option>
             <option value="event">Event</option>
             <option value="other">Other</option>
             <option value="theater">Theater</option>

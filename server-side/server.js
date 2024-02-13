@@ -9,6 +9,7 @@ const memberRouter = require("./src/routes/member.js")
 const scheduleRouter = require("./src/routes/schedule.js")
 const newsRouter = require("./src/routes/news.js")
 const merchRouter = require("./src/routes/merch.js")
+const songsRouter = require("./src/routes/songs.js")
 const path = require('path')
 
 app.use(express.json())
@@ -35,10 +36,11 @@ app.use('/api/v1/member', memberRouter)
 app.use('/api/v1/schedule', scheduleRouter)
 app.use('/api/v1/news', newsRouter)
 app.use('/api/v1/merch', merchRouter)
+app.use('/api/v1/song', songsRouter)
 
 
 app.listen(3000, () => {
-  console.log("server running")
+  console.log("server running at port 3000")
 })
 
 

@@ -30,6 +30,7 @@
 body{
     margin: 0 auto; /* Memusatkan body di layar desktop */
     max-width: 600px; /* Ukuran tetap untuk layar hp */
+
 }
 a{
   text-decoration: none;

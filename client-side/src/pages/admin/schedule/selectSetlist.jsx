@@ -14,12 +14,12 @@ const setListSelect = ({ values, setValues, name }) => {
             >
                 <option defaultValue>pilih setlist</option>
                 <option value="event.jpg">event</option>
-                <option value="cmr.jpg">Cara meminum ramune</option>
-                <option value="rkj.jpg">aturan anti cinta</option>
-                <option value="tunas.jpg">tunas dibalik seragam</option>
+                  <option value="cara meminum ramune.jpg">Cara meminum ramune</option>
+                <option value="aturan anti cinta.jpg">aturan anti cinta</option>
+                <option value="tunas dibalik seragam.jpg">tunas dibalik seragam</option>
                 <option value="trainee.jpg">ingin bertemu</option>
-                <option value="banzai.jpg">banzai JKT48</option>
-                <option value="panjama.jpg">panjama drive</option>
+                <option value="banzai JKT48.jpg">banzai JKT48</option>
+                <option value="pajama drive.jpg">pajama drive</option>
             </select>
         </>
     );

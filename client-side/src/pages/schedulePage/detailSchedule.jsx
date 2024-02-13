@@ -3,18 +3,21 @@ import { useState, useEffect } from "react";
 import { formatDate } from "../../../libs/formatDate.js";
 import { getScheduleId } from "../../../libs/schedule.js";
 import { memberList } from "../../../libs/member-list.js";
+import { getSongsBySetlist } from "../../../libs/songs.js";
 import ScheduleDetail from "../../component/detail/scheduleDetail.jsx";
 import Card from '../../component/card-member/card-member.jsx'
+import CardSong from '../../component/card-member/card-song-search.jsx'
 
 const scheduleDetail = () => {
     const [data, setData] = useState([]);
     const [memberData, setMember] = useState([]);
     const [memberListData, setMemberList] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
+    const [setlistSong, setSetlistSong] = useState([]);
     const [date, setDate] = useState();
     
 
-    const validateBg = data.setlist == "rkj.jpg" ? "bg-black" : data.setlist == "cmr.jpg" ? "bg-[#00BEE2]" : data.setlist == "trainee.jpg" ? "bg-[#BCFFBC]" : data.setlist == "panjama.jpg" ? "bg-[#1E2337]" : data.setlist == "event.jpg" ? "bg-[#2F5597]" : null;
+    const validateBg = data.setlist == "aturan anti cinta.jpg" ? "bg-black" : data.setlist == "cara meminum ramune.jpg" ? "bg-[#00BEE2]" : data.setlist == "trainee.jpg" ? "bg-[#BCFFBC]" : data.setlist == "pajama drive.jpg" ? "bg-[#1E2337]" : data.setlist == "event.jpg" ? "bg-[#2F5597]" : null;
     
     const { id } = useParams();
     const IMAGE_URL = import.meta.env.VITE_BASE_URL_IMAGE;
@@ -24,8 +27,13 @@ const scheduleDetail = () => {
             setMember(res.memberPerform);
             setDate(formatDate(res.date));
         });
-
     }, [memberData]);
+    
+    useEffect(() => {
+      const title = data.title
+        getSongsBySetlist(`/${title}`)
+        .then(res => setSetlistSong(res)) 
+    }, [data])
     
     useEffect(() => {
         memberList("member/memberList").then(res => {
@@ -57,12 +65,24 @@ const scheduleDetail = () => {
             )}
           </div>
           
-          {/* <Mapping /> */}
+          {/* <Mapping Member perform /> */}
           <div className="w-full grid grid-cols-4 gap-x-3 mt-5 px-5"> 
           {
             filteredData.map(item => <Card item={item} />)
           }
           </div>
+          
+          { /*MAPPING SETLIST SONG*/}
+          <div className='px-5 pt-7'>
+            <h3 className='font-poppins text-black capitalize text-xl font-medium'>Setlist</h3>
+            <p>daftar lagu yang akan dibawakan </p>
+            <div className='px-3'>
+                {
+                  setlistSong?.map(item => <CardSong key={item.id} item={item}/>)
+                }
+            </div>
+          </div>
+
         </section>
     );
 };
