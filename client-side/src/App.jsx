@@ -1,8 +1,9 @@
 import { BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom";
-import {useState, useEffect} from 'react'
+import {useState, useEffect} from 'react';
 import "./App.css";
-import axios from 'axios'
+import axios from 'axios';
 import 'rsuite/styles/index.less';
+
 
 import Headers from "./component/headers/headers.jsx";
 import Navbar from "./component/navbar/navbar.jsx";
@@ -30,11 +31,11 @@ import DetailSchedule from "./pages/schedulePage/detailSchedule.jsx";
 
 // =============== COMPONENT FOR ADMIN ======================
 // NEWS COMPONENT
-import PostSchedule from './pages/admin/schedule/postSchedule.jsx'
-import EditSchedule from './pages/admin/schedule/editSchedule.jsx'
+import PostSchedule from './pages/admin/schedule/postSchedule.jsx';
+import EditSchedule from './pages/admin/schedule/editSchedule.jsx';
 // NEWS COMPONENT
-import PostNews from './pages/admin/news/postNews.jsx'
-import EditNews from './pages/admin/news/editPost.jsx'
+import PostNews from './pages/admin/news/postNews.jsx';
+import EditNews from './pages/admin/news/editPost.jsx';
 
 
 
@@ -42,18 +43,18 @@ import EditNews from './pages/admin/news/editPost.jsx'
 function App() {
     const [user, setUser] = useState('');
     const [isActive, setIsActive] = useState(false);
-    const admin = import.meta.env.VITE_ADMIN_ROLE
+    const admin = import.meta.env.VITE_ADMIN_ROLE;
   
   useEffect(() => {
-    const user = localStorage.getItem('user')
-    setUser(user)
+    const user = localStorage.getItem('user');
+    setUser(user);
     // authToken()
     if (user == admin) {
-      setIsActive(true)
+      setIsActive(true);
     } else{
-      setIsActive(false)
+      setIsActive(false);
     }
-  }, [user])
+  }, [user]);
   
   
   
