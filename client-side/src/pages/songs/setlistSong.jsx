@@ -1,6 +1,7 @@
 import {useParams} from 'react-router-dom'
 import {getSongsBySetlist} from '../../../libs/songs.js'
 import {useState, useEffect} from 'react'
+import CardSong from '../../component/card-member/card-song-search.jsx'
 
 
 
@@ -16,10 +17,10 @@ const setlistSong = () => {
   
   
   return(
-  <div>  
-    INI UNTUK SETLIST LIST AFTER SEARCH {setlist}
+  <div className='p-4 pb-20'>  
+    
     {
-      songs.map((item) => <p key={item.id}>{item.title}</p>)
+      songs.map((item) => <CardSong key={item.id} item={item}/>)
     } 
   </div>  
     

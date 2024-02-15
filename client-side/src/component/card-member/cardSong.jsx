@@ -13,8 +13,8 @@ const cardSong = ({ item }) => {
                     className="w-full h-full object-contain z-20"
                 />
                 {/*TITLE CONTENT*/}
-                <div className="px-2 h-20 mt-3 capitalize">
-                    <p className="font-poppins font-[500] text-red-500 text-base line-clamp-3">
+                <div className="px-2 h-14 mt-3 capitalize">
+                    <p className="font-poppins font-[500] text-red-500 text-base line-clamp-2">
                         {item.title}
                     </p>
                 </div>

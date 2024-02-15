@@ -2,11 +2,6 @@ import {Link} from 'react-router-dom'
 import {validateBg} from '../../../libs/schedule.js'
 
 const setlistSearch = ({item}) => {
-  // const validateBg = item.setlist == 'aturan anti cinta' ? 'bg-black' :
-  //   item.setlist == 'cara meminum ramune' ? 'bg-[#00BEE2]' : 
-  //   item.setlist == 'trainee' ? 'bg-[#BCFFBC]' : 
-  //   item.setlist == 'pajama drive' ? 'bg-[#1E2337]' : 'bg-[#2F5597]'
-    
     const validate = validateBg(item)
     
     
