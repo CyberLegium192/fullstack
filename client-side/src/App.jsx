@@ -12,7 +12,10 @@ import NewsPage from "./pages/newsPage/newsPage.jsx";
 import SchedulePage from "./pages/schedulePage/schedulePage.jsx";
 import MemberPage from "./pages/memberPage/memberPage.jsx";
 import Login from "./pages/loginPage/login.jsx";
+// PROFILE
 import Profile from "./pages/profilePage/profile.jsx";
+import UserLikeSong from "./pages/profilePage/userLikeSong.jsx";
+
 import Register from "./pages/registerPage/register.jsx";
 import Settings from "./pages/settings/settings.jsx";
 import EditBIo from "./pages/editBio/editBio.jsx";
@@ -79,11 +82,18 @@ function App() {
                     <Route path="/news" element={<NewsPage isActive={isActive} />} />
                     <Route path="/schedule" element={<SchedulePage isActive={isActive} />} />
                     <Route path="/detail/schedule/:id" element={<DetailSchedule />} />
+                    
+                    
                     <Route path="/member" element={<MemberPage />} />
                     <Route path="/member/:id" element={<DetailMember />} />
                     <Route path="/login" element={<Login />} />
+                    
                     <Route path="/profile/settings" element={<Settings />} />
                     <Route path="/profile/edit/user/:id" element={<EditBIo />} />
+                    <Route path="/profile/songs" element={<UserLikeSong />}/>
+                    
+                    
+                    
                     <Route path="/register" element={<Register />} />
                     <Route path="/profile" element={<Profile />} />
                     

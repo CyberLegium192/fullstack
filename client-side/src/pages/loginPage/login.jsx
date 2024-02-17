@@ -14,11 +14,11 @@ const login = () => {
     password: "",
   })
   const [erorrPass, setErorrPass] =useState("")
+  const [tes, setTes] = useState([])
   
   
   const submit = (e) => {
     e.preventDefault()
-    // axios.post("http://localhost:3000/api/v1/user/login", value)
     loginUser(value)
     .then(res => {
       if (res.error == "Pengguna tidak ditemukan") {
@@ -26,6 +26,7 @@ const login = () => {
       } else if(res.error == "Password salah"){
         setErorrPass(res.error)
       }else{
+        localStorage.setItem('id', res.user.id)
         navigate("/profile")
       }
     })
@@ -35,6 +36,7 @@ const login = () => {
   return (
     <div className="min-h-screen w-full flex items-center">
     <form className="flex flex-col gap-4 w-full p-5 px-8 font-poppins" onSubmit={submit}>
+    
       <div>
         <div className="mb-2 block">
           <Label htmlFor="email1" value="Email" className="text-md"/>

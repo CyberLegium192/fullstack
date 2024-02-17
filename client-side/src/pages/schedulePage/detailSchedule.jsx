@@ -30,8 +30,11 @@ const scheduleDetail = () => {
     }, [memberData]);
     
     useEffect(() => {
-      const title = data.title
-        getSongsBySetlist(`/${title}`)
+      if (!data || !data.setlist) {
+        return
+      }
+      const setlist = data.setlist?.replace('.jpg', '')
+        getSongsBySetlist(`?setlist=${setlist}&title=`)
         .then(res => setSetlistSong(res)) 
     }, [data])
     
@@ -75,8 +78,8 @@ const scheduleDetail = () => {
           { /*MAPPING SETLIST SONG*/}
           <div className='px-5 pt-7'>
             <h3 className='font-poppins text-black capitalize text-xl font-medium'>Setlist</h3>
-            <p>daftar lagu yang akan dibawakan </p>
-            <div className='px-3'>
+            <p className='font-poppins text-lg font-normal my-3 text-slate-600'>daftar lagu yang akan dibawakan pada event ini</p>
+            <div className='px-2'>
                 {
                   setlistSong?.map(item => <CardSong key={item.id} item={item}/>)
                 }

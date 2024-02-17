@@ -1,5 +1,5 @@
 import {useParams} from 'react-router-dom'
-import {getSongsBySetlist} from '../../../libs/songs.js'
+import {getSongsBySetlist, getLirik} from '../../../libs/songs.js'
 import {useState, useEffect} from 'react'
 import SongHeader from '../../component/detail/songHeader.jsx'
 import Lyrics from '../../component/detail/lyrics.jsx'
@@ -8,12 +8,18 @@ import Lyrics from '../../component/detail/lyrics.jsx'
 
 const songDetail = () => {
   const [song, setSong] = useState([])
+  const [lyrics, setLyrics] = useState([])
+  
   const {title} = useParams()
   
   useEffect(() => {
     getSongsBySetlist(`?setlist=&title=${title}`)
     .then(res => setSong(res[0]))
-  }, [])
+    
+    getLirik(`/${title}`)
+    .then(res => setLyrics(res[0]))
+    
+  }, [lyrics])
   
   
   return(
@@ -24,7 +30,7 @@ const songDetail = () => {
           <SongHeader item={song}/>
           
           <h3 className='font-poppins text-xl font-semibold mt-14 mb-3'>Lirik</h3>
-          <Lyrics />
+          <Lyrics item={lyrics}/>
         </div>
       
       </div>      

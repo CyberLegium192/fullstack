@@ -1,13 +1,26 @@
 import {Link} from 'react-router-dom'
 import { FaPencil } from "react-icons/fa6";
 import {useState, useEffect} from 'react'
+import {getLikesUser} from '../../../libs/songs.js'
 import ModalAvatar from '../../component/modal/changeAvatar.jsx'
+
 
 const profileHeader = ({avatar, updateAvatar, data}) => {
   const [profile, setProfile] = useState(null)
   const [openModal, setOpenModal] = useState(false);
-
+  const [likeSong, setLikeSong] = useState([]);
+  
   const IMAGE_URL = import.meta.env.VITE_BASE_URL_IMAGE;
+  const user_id = localStorage.getItem('id')
+  useEffect(() => {
+    getLikesUser(user_id)
+    .then(res => setLikeSong(res))
+  })
+  
+  
+  
+  
+  
   
   return(
     <>
@@ -22,8 +35,11 @@ const profileHeader = ({avatar, updateAvatar, data}) => {
       </div>
       
       <ul className='flex items-center px-7 justify-between w-[75%] text-center font-poppins text-red-600 font-medium capitalize'>
-        <li className='text-xl'>0
-          <p className='text-normal mt-1'>lagu disukai</p>
+        <li className='text-xl text-red-600'>
+          <Link to='/profile/songs'>
+            {likeSong.length}
+            <p className='text-normal mt-1'>lagu disukai</p>
+          </Link>
         </li>
         <li className='text-xl'>0
           <p className='text-normal mt-1'>tulisan</p>

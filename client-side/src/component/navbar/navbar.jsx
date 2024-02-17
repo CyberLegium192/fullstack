@@ -26,7 +26,7 @@ const navbar = () => {
         } else if (currentPath.includes("profile")) {
             setValue("profile");
         } else {
-            console.log("halo");
+            console.log('halo')
         }
     }, [location.pathname]);
 

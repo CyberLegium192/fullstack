@@ -38,7 +38,7 @@ const birthday = () => {
 
     <div className='grid grid-cols-4 gap-x-5'>
       {
-        mapping.map(item => <Card item={item} dynamic={'text-white'} key={item.id}/>)
+        mapping.map(item => item.status !== 'Anggota' ? null : <Card item={item} dynamic={'text-white'} key={item.id}/>)
       }
     </div>
     

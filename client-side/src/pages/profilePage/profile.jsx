@@ -10,9 +10,9 @@ const profile = () => {
   const [datas, setDataAuth] = useState([])
   const [id, setId] = useState()
   const [newToken, setNewToken] = useState('');
+  
   axios.defaults.withCredentials = true
   const navigate = useNavigate()
-  
   const handleUpdateAvatar = async (avatar) => {
     const formData = new FormData()
     formData.append('avatar', avatar)
@@ -29,8 +29,6 @@ const profile = () => {
       console.error("Error updating avatar:", error);
     }
   };
-  
-  
   
   const fethcing = () => {
     const dataToken = datas.token
@@ -65,10 +63,8 @@ const profile = () => {
       <p className='text-lg -mt-4 font-poppins text-gray-400 font-medium p-3'>{data?.bio}</p>
       
       <div className='w-full p-3  h-3/5 flex items-center justify-center flex-col'>
-        
           <GrNotes size={60} className='text-red-600 mb-6'/>
           <span className='text-lg tracking-wide font-poppins font-medium'>Tidak ada blog untuk saat ini</span>
-          
       </div>
       
       

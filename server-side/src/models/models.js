@@ -6,6 +6,7 @@ const getUserByEmail = (email, callback) => {
   con.query(sql, [email], (err, results) => {
     if(err) throw err
     callback(results[0])
+    
   })
 }
 
