@@ -78,11 +78,14 @@ const updateBio = (req, res) => {
 
 
 
+
+
+
 module.exports = {
   postUser,
   updateUser,
   getUserByEmail,
   updateAvatarUser,
   getUserProfile,
-  updateBio
+  updateBio,
 }

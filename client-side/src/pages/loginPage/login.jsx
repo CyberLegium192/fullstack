@@ -13,18 +13,22 @@ const login = () => {
     email: "",
     password: "",
   })
+  const [erorrMail, setErorrMail] =useState("")
   const [erorrPass, setErorrPass] =useState("")
   const [tes, setTes] = useState([])
   
   
   const submit = (e) => {
+    let isValid = true
     e.preventDefault()
     loginUser(value)
     .then(res => {
       if (res.error == "Pengguna tidak ditemukan") {
-        alert(res.error)
+        setErorrMail(res.error)
+        isValid = false
       } else if(res.error == "Password salah"){
         setErorrPass(res.error)
+        isValid = false
       }else{
         localStorage.setItem('id', res.user.id)
         navigate("/profile")
@@ -39,10 +43,22 @@ const login = () => {
     
       <div>
         <div className="mb-2 block">
-          <Label htmlFor="email1" value="Email" className="text-md"/>
+          <Label htmlFor="email1" value="Email"
+          className="text-md"
+          color={erorrMail == "" ? "gray" : "failure"}
+          />
         </div>
         <TextInput id="email1" type="email" placeholder="example@gmail.com" required
-        onChange={(e) => setValue({...value, email: e.target.value})}/>
+        onChange={(e) => setValue({...value, email: e.target.value})}
+        color={erorrMail == "" ? "gray" : "failure"}
+          helperText={
+            <>
+            {
+              erorrMail == "" ? "" : <span className="font-poppins text-sm">{erorrMail}!</span>
+            }
+            </>
+          }
+        />
       </div>
       
       <div>

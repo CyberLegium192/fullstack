@@ -20,7 +20,11 @@ import Register from "./pages/registerPage/register.jsx";
 import Settings from "./pages/settings/settings.jsx";
 import EditBIo from "./pages/editBio/editBio.jsx";
 
-// SONGS
+// =============== BLOG ===================
+import BlogPage from './pages/blog/blogPage.jsx'
+import CreateBlog from './pages/blog/createBlog.jsx'
+
+// =============== SONGS ==================
 import SongsPage from "./pages/songs/songs.jsx";
 import SongsDetails from "./pages/songs/songDetail.jsx";
 import SearchSong from "./pages/songs/searchSong.jsx";
@@ -29,7 +33,6 @@ import SetlistSong from "./pages/songs/setlistSong.jsx";
 // ================== SINGGLE PAGE  =========================
 import DetailMember from "./pages/memberPage/detailMember.jsx";
 import DetailSchedule from "./pages/schedulePage/detailSchedule.jsx";
-
 
 
 // =============== COMPONENT FOR ADMIN ======================
@@ -70,11 +73,15 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Navigate to="/beranda" />} />
                     <Route path="/beranda" element={<HomePage />} />
+                    {/*SONG ROUTE*/}
                     <Route path="/lagu" element={<SongsPage  />} />
                     <Route path="/lagu/:title" element={<SongsDetails  />} />
                     <Route path="/lagu/album" element={<SearchSong  />} />
                     <Route path="/lagu/album/:setlist" element={<SetlistSong  />} />
                     
+                    {/*BLOG ROUTE*/}
+                    <Route path="/blog" element={<BlogPage  />} />
+                    <Route path="/createBlog" element={<CreateBlog  />} />
                     
                     
                     

@@ -58,25 +58,19 @@ router.patch('/profile/edit/avatar/:id', upload.single('avatar'), userController
 });
 
 
-
-
-
-
-
-
 // GET PERSONAL USER AFTER LOGIN
 router.get('/profilePage/:id', (req, res) => userController.getUser(req,res))
 
-
+// UPDATE BIO USER
 router.patch('/update/user/:id', (req, res) => {
   userController.updateBio(req, res)
 })
-
 
 // DELETE cookie
 router.get('/logout', (req, res) => {
   res.clearCookie('token')
   res.json({status: "success"})
+  
 })
 
 

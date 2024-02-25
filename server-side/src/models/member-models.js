@@ -41,7 +41,7 @@ const postMember = (req, res) => {
     blood, height, showall, status, profile, jiko, instagram, tiktok, tweet, showroom, fanbase], (err, results) => {
       if (err) throw err
       res.json({
-        message:   'SUCCESS',
+        message: 'SUCCESS',
         results
       })
     })
