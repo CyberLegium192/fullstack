@@ -1,6 +1,6 @@
 import { LiaCommentDots } from "react-icons/lia";
 
-const blogCard = ({item}) => {
+const blogCard = ({item, handleComment}) => {
   const IMAGE_URL_PROFILE = import.meta.env.VITE_BASE_URL_IMAGE;
   const IMAGE_URL_COVER = import.meta.env.VITE_BASE_URL_IMAGE;
   
@@ -22,7 +22,7 @@ const blogCard = ({item}) => {
           <p className='font-poppins font-normal text-[15px] mt-2'>{item.dest}</p>
         </div>
         
-        <div className='p-1 mt-2 cursor-pointer select-none flex gap-x-3 items-center'>
+        <div className='p-1 mt-2 cursor-pointer select-none flex gap-x-3 items-center' onClick={e => handleComment(item.id)}>
           <LiaCommentDots size={30} className='text-red-500'/>
           <p className='text-black text-sm font-poppins font-normal'>0 Komentar</p>
         </div>

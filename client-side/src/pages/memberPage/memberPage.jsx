@@ -4,6 +4,8 @@ import Card from "../../component/card-member/card-member"
 import LiveCard  from '../../component/card-member/liveCard.jsx'
 import {memberList, liveShowroom} from '../../../libs/member-list.js'
 import LiveCarousel from  '../../component/carousel/lieveCarousel.jsx'
+import { motion } from 'framer-motion'
+
 
 const memberPage = () => {
   const [data, setData] = useState([])
@@ -32,8 +34,16 @@ const memberPage = () => {
       
       <div className="w-full grid grid-cols-4 justify-start gap-x-3 mt-5"> 
         {
-          data?.map((item) => <Card item={item} key={item.id}/> )
-       }
+          data?.map((item, index) => 
+          <motion.div
+            key={item.id}
+            initial={{ opacity: 0, x: -40 }}
+            animate={{ opacity: 1, x: 0 }}  
+            transition={{ duration: 0.5, delay: index * 0.4 }}>
+          <Card item={item}/> 
+          </motion.div>
+          )
+        }
       </div> 
       
       

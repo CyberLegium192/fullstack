@@ -11,10 +11,6 @@ const createBlog = () => {
     const [dest, setDest] = useState('');
     const [cover2, setCover] = useState(null);
     const id_user = localStorage.getItem('id')
-    // const [erorr, setErorr] = useState({
-    //   title: '',
-    //   dest: '',
-    // })
     const [erorrTitle, setErorrTitle] = useState()
     const [erorrDest, setErorrDest] = useState()
     
@@ -34,6 +30,7 @@ const createBlog = () => {
     const handleUpload = () => {
         const value = {
           username: username,
+          id_user: id_user,
           profile: profile,
           date: dateConvert(),
           cover: cover2,

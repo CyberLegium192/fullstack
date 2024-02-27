@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom'
 import {Button} from 'flowbite-react'
 import {useState, useEffect} from 'react'
 import {newsDelete} from '../../../libs/news.js'
-
+import { motion } from "framer-motion"
 
 const newsCard = ({ item, isActive }) => {
   const [date, setDate] = useState()
@@ -33,7 +33,11 @@ const newsCard = ({ item, isActive }) => {
 
 
     return (
-        <li className="mb-6 ms-6 relative shadow-md rounded-md border border-red-600">
+        <motion.li className="mb-6 ms-6 relative shadow-md rounded-md border border-red-600"
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
           <Link to={item.link} className='relative'>
             <span className="absolute flex items-center justify-center w-6 h-6 bg-red-600 rounded-full ring-8 ring-white dark:ring-red-800 dark:bg-red-700 -left-[36px]">
                 <SlCalender size={14} className="text-white" />
@@ -65,7 +69,7 @@ const newsCard = ({ item, isActive }) => {
               
             </div> : null
             }
-        </li>
+        </motion.li>
     );
 };
 export default newsCard;

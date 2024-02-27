@@ -3,6 +3,7 @@ import {scheduleList} from '../../../libs/schedule.js'
 import axios from "axios";
 import ScheduleCard from "../../component/card-member/scheduleCard.jsx";
 import {Link} from 'react-router-dom'
+import {motion} from 'framer-motion'
 
 const schedulePage = ({isActive}) => {
     const [data, setData] = useState([]);
@@ -40,8 +41,14 @@ const schedulePage = ({isActive}) => {
         
         
             <div className="mt-4 flex flex-wrap justify-between gap-y-5">
-                {data?.map(item => (
-                    <ScheduleCard key={item.id} item={item} isActive={isActive}/>
+                {data?.map((item, index) => (
+                  <motion.div
+                    key={item.id}
+                    initial={{ opacity: 0, y: -50 }}
+                    animate={{ opacity: 1, y: 0 }}  
+                    transition={{ duration: 0.6, delay: index * 0.4 }} className='w-[47%]'>
+                  <ScheduleCard item={item} isActive={isActive}/>
+                  </motion.div>
                 ))}
             </div>
             

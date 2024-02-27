@@ -15,7 +15,7 @@ export const dateConvert = (value) => {
 export const getBlog = async () => {
   const response = await axios.get(`${import.meta.env.VITE_BASE_API}/blog`)
   return response.data.blog
-}
+}       
 
 
 // POST BLOG
@@ -26,4 +26,17 @@ export const postBlog = async (value) => {
     }
   })
   return response.data
+}
+
+// GET USER POST IN PROFILE 
+export const getUserPost = async(id) => {
+  const response = await axios.get(`${import.meta.env.VITE_BASE_API}/blog/user/${id}`)
+  return response.data.blog
+}
+
+
+// GET COMMENT ON BLOG
+export const getComment = async(id) => {
+  const response = await axios.get(`${import.meta.env.VITE_BASE_API}/blog/comments/${id}`)
+  return response.data.blog
 }

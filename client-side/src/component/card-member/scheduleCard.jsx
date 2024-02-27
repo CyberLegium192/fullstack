@@ -48,7 +48,7 @@ const scheduleCard = ({item, isActive}) => {
   
 
   return(
-    <div className='w-[47%] shadow-lg rounded-lg overflow-hidden relative before:bg-red-500 hover:no-underline duration-500 cursor-default pb-3'>
+    <div className=' shadow-lg rounded-lg overflow-hidden relative before:bg-red-500 hover:no-underline duration-500 cursor-default pb-3'>
     <Link to={`${item.setlist == "event.jpg" ? item.link : 
       `/detail/schedule/${item.id}`}`} className='no-underline' key={item.id}>
         

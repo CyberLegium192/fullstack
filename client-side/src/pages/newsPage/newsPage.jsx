@@ -3,7 +3,7 @@ import {useState, useEffect} from 'react'
 import axios from 'axios'
 import {getNewsList} from '../../../libs/news.js' 
 import {Link} from 'react-router-dom'
-
+import {motion} from 'framer-motion'
 
 const newsPage = ({isActive}) => {
   const [data, setData] = useState([])
@@ -33,8 +33,15 @@ const newsPage = ({isActive}) => {
     
     
       <ol className="relative border-s border-red-400 dark:border-gray-700 mt-9">
-      {data?.map((item) => <CardNews item={item} key={item.id} isActive={isActive}/>)
-      }
+        {data?.map((item, index) => 
+        <motion.div
+        key={item.id}
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}  
+        transition={{ duration: 0.5, delay: index * 0.4 }}> <CardNews item={item} isActive={isActive} 
+        />
+        </motion.div>)
+        }
       </ol>
       
     </div>

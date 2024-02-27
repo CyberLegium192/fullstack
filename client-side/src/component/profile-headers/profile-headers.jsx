@@ -3,9 +3,9 @@ import { FaPencil } from "react-icons/fa6";
 import {useState, useEffect} from 'react'
 import {getLikesUser} from '../../../libs/songs.js'
 import ModalAvatar from '../../component/modal/changeAvatar.jsx'
+import {motion} from 'framer-motion'
 
-
-const profileHeader = ({avatar, updateAvatar, data}) => {
+const profileHeader = ({avatar, updateAvatar, data, blog}) => {
   const [profile, setProfile] = useState(null)
   const [openModal, setOpenModal] = useState(false);
   const [likeSong, setLikeSong] = useState([]);
@@ -27,7 +27,8 @@ const profileHeader = ({avatar, updateAvatar, data}) => {
     <div className='flex p-2 gap-x-4 w-full'>
       <div className='h-26 relative w-24 flex relative flex-col items-center'>
         <img src={`${IMAGE_URL}/assets/${avatar == "user" || avatar == 'admin' || !avatar ? 'f2.png' : avatar}`} 
-        className='border-2 border-slate-700 w-full rounded-full object-cover h-24' alt='profile'/>
+        className='border-2 border-slate-700 w-full rounded-full object-cover h-24' alt='profile'
+        />
         
         <button onClick={() => setOpenModal(!openModal)} className='text-red-500 text-poppins cursor-pointer z-20 text-[16px] mt-2 font-medium'
         aria-label="modal button">Ganti Avatar
@@ -41,7 +42,7 @@ const profileHeader = ({avatar, updateAvatar, data}) => {
             <p className='text-normal mt-1'>lagu disukai</p>
           </Link>
         </li>
-        <li className='text-xl'>0
+        <li className='text-xl'>{blog.length}
           <p className='text-normal mt-1'>tulisan</p>
         </li>
         <li>
