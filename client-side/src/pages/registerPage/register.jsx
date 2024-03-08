@@ -160,7 +160,7 @@ const register = () => {
       
       <div className="flex items-center gap-2">
         <Checkbox id="agree" />
-        <Label htmlFor="agree" className="flex" className="text-md">
+        <Label htmlFor="agree" className="text-md">
           I agree with the&nbsp;
           <Link href="#" className="text-cyan-600 hover:underline dark:text-cyan-500">
             terms and conditions
